@@ -98,6 +98,28 @@ patch -d go2rtc-src -p1 < go2rtc/go2rtc-cold-start.patch   # build go2rtc v1.9.1
 
 Detailed runbook, tuning and acceptance data: [`docs/OPERATIONS.md`](docs/OPERATIONS.md).
 
+### Ready-to-use go2rtc fork | 可直接使用的 go2rtc Fork
+
+If you only need a working go2rtc build (no manual patching), use the maintained fork
+[`Hylouis233/go2rtc`](https://github.com/Hylouis233/go2rtc): the cold-start fixes are
+already merged into its default branch.
+
+```sh
+git clone https://github.com/Hylouis233/go2rtc
+cd go2rtc
+CGO_ENABLED=0 go build ./...
+CGO_ENABLED=0 go test -count=1 ./pkg/xiaomi/miss/...
+```
+
+Two patches live in `go2rtc/`: `go2rtc-cold-start.patch` is the deployment patch
+(with diagnostic timing prints) used by this project; `go2rtc-upstream-pr.patch` is a
+minimal, print-free version suitable for upstream (`git apply` against go2rtc master).
+See [`docs/UPSTREAM_PR.md`](docs/UPSTREAM_PR.md) for the difference, the (unsubmitted)
+upstream PR draft and verification steps.
+
+如果只需要一个能直接编译的 go2rtc，用上面的 Fork 即可，补丁已合入默认分支；
+`go2rtc-upstream-pr.patch` 是去除诊断打印、可提交上游的最小版本。
+
 ## Status | 状态
 
 Production use since 2026-10 on one PH300 (battery ~months per charge with daily live views).
