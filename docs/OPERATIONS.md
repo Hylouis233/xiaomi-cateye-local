@@ -118,7 +118,7 @@ Frigate nginx 的 VOD 目标切片为 2 秒，并保留关键帧对齐。旧客�
 
 ## 录像、容量和人脸
 
-Frigate 摄像头 ID 为 cateye。录像位于 nvr-host /home/lh/a/frigate-poc/media/recordings（容器 /media/frigate/recordings），与客厅共用同一约 916GiB 文件系统及空间清理机制，无猫眼单独 2GiB 限额。普通录像保留 90 天，事件录像 30 天；只在视频活跃期间启用猫眼采集，不代表持续取流。
+Frigate 摄像头 ID 为 cateye。录像位于 nvr-host /opt/frigate-poc/media/recordings（容器 /media/frigate/recordings），与客厅共用同一约 916GiB 文件系统及空间清理机制，无猫眼单独 2GiB 限额。普通录像保留 90 天，事件录像 30 天；只在视频活跃期间启用猫眼采集，不代表持续取流。
 
 早期两个独立 MP4 测试片归档在共享盘 exports/cateye-legacy，没有伪造写入 Frigate 数据库。
 
@@ -157,7 +157,7 @@ Frigate 摄像头 ID 为 cateye。录像位于 nvr-host /home/lh/a/frigate-poc/m
 - video_probe.py / cloud_wake.py：按需鉴权及已授权唤醒回退。
 - packages/cateye_face_history.yaml：最近识别人脸记录。
 - nvr-host 用户服务 nvr-privacy.service：客厅保护网关，安全流白名单包含 cateye_ha；不要把白名单泛化。
-- nvr-host /home/lh/a/frigate-poc/patches/nginx.conf：已挂载的 VOD nginx 配置，变更后 nginx -t 和平滑 reload，无需重启 NVR。
+- nvr-host /opt/frigate-poc/patches/nginx.conf：已挂载的 VOD nginx 配置，变更后 nginx -t 和平滑 reload，无需重启 NVR。
 
 凭据在 /config/.storage/cateye_local（0700，文件0600）。不得输出视频签名 URL、SDP、令牌和私钥。临时 OAuth 页面正常运行时关闭。
 
