@@ -26,10 +26,13 @@ The fork root contains `COLD_START_PATCH.md` (what changed and why) and
 Both patch go2rtc v1.9.15 base. The upstream-PR patch was verified against a fresh
 clone of `master` (2026-11-05): `git apply --check` OK, unit tests green, full build OK.
 
-## Upstream PR draft (not submitted)
+## Upstream PR (submitted)
 
-> Status: **draft only**. It has not been submitted to AlexxIT/go2rtc, and no comment
-> has been posted to the upstream known-cameras issue. See the note at the end.
+> Status: **submitted 2026-11-06** by `Hylouis233`. PR: [#2654](https://github.com/AlexxIT/go2rtc/pull/2654)
+> (OPEN, branch `Hylouis233:xiaomi-miss-cold-start` → `AlexxIT/go2rtc:master`, 5 files under
+> `pkg/xiaomi/miss/**`). A model report was also posted to the upstream known-cameras
+> [issue #1982](https://github.com/AlexxIT/go2rtc/issues/1982#issuecomment-6686794503).
+> The body below is the submitted text (desensitized). Follow the PR link for review status.
 
 ### Suggested PR title
 
@@ -69,17 +72,21 @@ pkg/xiaomi/miss/**. Cloud wake / key retrieval is still required each session (p
 the upstream Xiaomi source README); this PR only fixes the LAN media path after wake.
 ```
 
-### Known-cameras issue comment (also draft)
+### Known-cameras issue comment (posted)
 
-The upstream issue that tracks supported Xiaomi cameras is where a model report
-would go. A model-agnostic report would state: `cs2` transport, `xiaomi/mess` format,
-HEVC + Opus, and that the cold-start fixes above were needed. **No model identifier,
-device ID, firmware serial, account data or private network information should be
-included in a public comment.** This has not been posted.
+The model report was posted to the upstream known-cameras issue:
+[#1982 comment](https://github.com/AlexxIT/go2rtc/issues/1982#issuecomment-6686794503).
+It reports the public model identifier (`midr.cateye.ph300`), region, firmware version,
+`cs2` transport, `xiaomi/mess` format, HEVC + Opus codecs, and that the cold-start
+fixes above were needed — plus a pointer to the PR. It contains **no device ID, account
+data, private network address, local path or environment-specific detail**; a model
+identifier is public product information and is the point of that issue.
 
 ## Note on publishing
 
 The fork and this repository are public and use noreply commit identities. All
-device identifiers, account credentials, private network addresses and local paths
-were removed before publishing. Submitting the PR upstream or commenting on the
-upstream issue are separate, externally visible actions and have **not** been done.
+device IDs, account credentials, private network addresses and local paths were
+removed before publishing. On 2026-11-06 the PR was submitted upstream (#2654) and
+the model report was posted to issue #1982, both with desensitized text (see links
+above). The only device-specific string in the public comment is the public product
+model identifier, which is the purpose of the known-cameras issue.
