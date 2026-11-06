@@ -1,0 +1,79 @@
+{
+  "at": 1793380446.3579717,
+  "model": "midr.cateye.ph300",
+  "cloud_wake_calls": 2,
+  "cloud_key_refresh_calls": 0,
+  "video_requested": false,
+  "production_configuration_changed": false,
+  "first_cloud_wake_ms": 742,
+  "first_device_registration_ms": 4557,
+  "prearmed_cloud_wake_ms": 1109,
+  "prearmed_local_handshake_ready_ms": 6827,
+  "local_ready_after_final_observed_port_ms": 578,
+  "prearmed_client_external_coordination_sent": false,
+  "pure_local_after_idle": {
+    "quiet_s_before_probe": 132.4,
+    "cloud_called": false,
+    "cloud_wake_sent": false,
+    "cloud_key_refresh_sent": false,
+    "external_coordination": false,
+    "business_state": {
+      "error": "DeviceError",
+      "code": -30012,
+      "busy": true,
+      "elapsed_ms": 1103
+    },
+    "handshake_elapsed_ms": 6021,
+    "local_replies": []
+  },
+  "coordination_only_without_miot_wake": {
+    "elapsed_ms": 9000,
+    "server_source": "observed_device_registration",
+    "reply_count": 15,
+    "first_reply_ms": 25,
+    "statuses": [
+      "fe000000"
+    ],
+    "peer_count": 0,
+    "ready": false,
+    "status_meaning": "Non-success response; exact status mapping not established."
+  },
+  "legacy_metadata_api": {
+    "at": 1793379895.0880644,
+    "cloud_wake_sent": false,
+    "external_metadata_request": true,
+    "key_pair_reused": true,
+    "production_credentials_changed": false,
+    "error": "MIoTHttpError",
+    "code": -10000,
+    "http_status": 404,
+    "response_code": null,
+    "unauthorized": false,
+    "elapsed_ms": 168
+  },
+  "cached_coordination_addresses": {
+    "count": 3,
+    "all_loopback": true,
+    "encrypted_original_matches_cache": true,
+    "consequence": "Not usable as external coordination servers; video auth keys are a separate field."
+  },
+  "conclusion": "Known dynamic ports work during authorized wake but did not cold-wake the idle device. No validated replacement for current on-demand cloud wake.",
+  "limits": [
+    "P2P ready is not a decoded or browser-presented frame.",
+    "MIoT busy and quiet duration do not independently measure electrical sleep.",
+    "Server non-success does not by itself prove whether registration, identity, or policy caused rejection."
+  ],
+  "final_state": {
+    "streams": {
+      "cateye_live": {
+        "active_producers": 0,
+        "consumers": 0
+      },
+      "cateye_local": {
+        "active_producers": 0,
+        "consumers": 0
+      }
+    },
+    "viewer_active": false
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "updated_at": 1793389998.880745,
+  "device": {
+    "model": "midr.cateye.ph300",
+    "fw_ver": "5.3.1_0347",
+    "hw_ver": "BL616_ECO",
+    "miio_ver": "0.0.9"
+  },
+  "scope": "Documented and non-destructive routes executable with current authorized devices and credentials.",
+  "universal_impossibility_claim": false,
+  "remote_route_state": "tested_or_classified_with_explicit_remaining_prerequisites",
+  "routes": [
+    {
+      "id": "pr2631_oauth_adapted",
+      "status": "working_short_frame_sample",
+      "evidence": "pr2631_oauth_chain.json",
+      "frames": 9,
+      "first_decoded_ms": 9736,
+      "media_first_decoded_ms": 3155,
+      "cloud_wake_required_in_test": true,
+      "video_path": "LAN_only",
+      "adaptations": [
+        "existing OAuth instead of native Mi Home login",
+        "peer IP pinned to camera LAN address",
+        "actual observed CS2 pool substituted for loopback addresses returned in vendor metadata"
+      ],
+      "limit": "9 decoded frames; not a long-play or browser-presentation acceptance."
+    },
+    {
+      "id": "official_native_sdk",
+      "status": "working_short_frame_sample",
+      "evidence": "isolation_host_after_prepare.json",
+      "frames": 15,
+      "size": [
+        640,
+        480
+      ],
+      "sdk_first_decoded_ms": 5493,
+      "from_prepare_first_decoded_ms": 9279,
+      "cloud_wake_required_in_test": true,
+      "video_path": "LAN_only",
+      "version": "v0.1.7",
+      "limit": "Manual native-camera instantiation bypassed the Python model allowlist; full Miloco UI not deployed."
+    },
+    {
+      "id": "official_sdk_without_explicit_wake",
+      "status": "tested_no_frames",
+      "evidence": "isolation_host_without_wake.json",
+      "frames": 0,
+      "start_code": -1,
+      "elapsed_ms": 9298,
+      "limit": "SDK cloud authentication network was allowed; this was not an offline-key-only test."
+    },
+    {
+      "id": "official_sdk_cached_manager_local_only",
+      "status": "tested_no_frames",
+      "evidence": "isolation_host_cache_reuse.json",
+      "first_phase_frames": 15,
+      "idle_s": 90.0,
+      "idle_attempted_camera_packets": 0,
+      "resume_cloud_network_blocked": true,
+      "resume_start_code": -2,
+      "resume_frames": 0
+    },
+    {
+      "id": "miio_wake_action",
+      "status": "tested_busy",
+      "evidence": "findings.json",
+      "token_validated": true,
+      "siid": 2,
+      "aiid": 3,
+      "code": -30012
+    },
+    {
+      "id": "miio_screen_wake",
+      "status": "tested_busy",
+      "evidence": "local_screen_wake_probe.json",
+      "siid": 2,
+      "aiid": 2,
+      "code": -30012,
+      "firmware": {
+        "model": "midr.cateye.ph300",
+        "fw_ver": "5.3.1_0347",
+        "hw_ver": "BL616_ECO",
+        "miio_ver": "0.0.9"
+      }
+    },
+    {
+      "id": "local_start_p2p_and_vendor_wake_methods",
+      "status": "tested_not_successful",
+      "evidence": "local_wake_research.json",
+      "methods": [
+        "wakeup",
+        "wakeup_host",
+        "action 2/3 parameter variants",
+        "action 12/1"
+      ]
+    },
+    {
+      "id": "cached_dynamic_port_after_idle",
+      "status": "tested_no_handshake",
+      "evidence": "dynamic_port_experiments.json",
+      "quiet_s": 132.4,
+      "probe_ms": 6021
+    },
+    {
+      "id": "standard_wowlan_magic",
+      "status": "exploratory_test_no_video",
+      "evidence": "local_magic_wake_probe.json",
+      "cloud_called": false,
+      "limit": "No model-specific WoWLAN support was claimed; only standard magic-packet forms tested."
+    },
+    {
+      "id": "cs2_introduction_without_wake",
+      "status": "tested_no_ready_peer",
+      "evidence": "dynamic_port_experiments.json",
+      "external_coordination_used": true,
+      "server_status": "fe000000",
+      "limit": "Non-success status meaning not conclusively decoded."
+    },
+    {
+      "id": "cached_pr_credentials",
+      "status": "cached_auth_rejected_one_sample",
+      "evidence": "pr2631_cached_chain.json",
+      "key_requests": 0,
+      "credential_age_s": 2441,
+      "limit": "Cannot infer a universal expiry interval or the cause of invalidation from this sample."
+    },
+    {
+      "id": "hass_xiaomi_miot",
+      "status": "source_equivalent_not_separately_deployed",
+      "sources": [
+        "hass-miot-device.py:1225",
+        "hass-miot-customizes.py:3319",
+        "hass-miio2miot.py:43"
+      ],
+      "finding": "Standard local action packet matches tested miIO; no ph300 custom translation found. Cateye defaults auto_cloud true."
+    },
+    {
+      "id": "miloco_micam_complete_stack",
+      "status": "same_native_transport_not_separately_deployed",
+      "sources": [
+        "miloco-camera-extra.yaml",
+        "micam-init.py",
+        "micam-README.md"
+      ],
+      "finding": "Underlying official native SDK works. Default cateye filtering needs adaptation; continuous bridge operation does not meet on-demand policy."
+    },
+    {
+      "id": "native_rtsp_onvif_homekit",
+      "status": "no_standard_service_found_in_test_window",
+      "evidence": [
+        "pr2631_oauth_chain.json",
+        "camera_standard_discovery.json"
+      ],
+      "tcp_ports_tested": [
+        {
+          "port": 80,
+          "open": false
+        },
+        {
+          "port": 443,
+          "open": false
+        },
+        {
+          "port": 554,
+          "open": false
+        },
+        {
+          "port": 8554,
+          "open": false
+        },
+        {
+          "port": 8899,
+          "open": false
+        },
+        {
+          "port": 2020,
+          "open": false
+        },
+        {
+          "port": 8000,
+          "open": false
+        },
+        {
+          "port": 8080,
+          "open": false
+        }
+      ],
+      "mdns_camera_services": [],
+      "onvif_camera_responses": [],
+      "limit": "Does not prove every undocumented port or future firmware is unsupported."
+    },
+    {
+      "id": "central_hub_mips",
+      "status": "blocked_no_eligible_hub_discovered",
+      "evidence": [
+        "authorized_hub_inventory_complete.json",
+        "mips_hub_discovery.json"
+      ],
+      "authorized_inventory_candidates": [
+        {
+          "model": "lumi.gateway.acn004",
+          "online": true,
+          "connect_type": 0
+        },
+        {
+          "model": "xiaomi.wifispeaker.x08a",
+          "online": false,
+          "connect_type": 0
+        }
+      ],
+      "mips_service_count": 0,
+      "limit": "Same-model cold wake through a real supported central hub remains untested."
+    },
+    {
+      "id": "bluetooth_local",
+      "status": "blocked_no_identified_endpoint_or_published_wake_command",
+      "evidence": "passive_ble_probe.json",
+      "passive_scan_s": 8,
+      "advertisements": 305,
+      "camera_address_matches": 0,
+      "declared_gatt_access_operations": 0,
+      "adapter_restored": true,
+      "limit": "A negative passive scan and empty MIoT GATT declarations do not prove that no private BLE interface exists."
+    },
+    {
+      "id": "cloud_command_local_replay",
+      "status": "blocked_no_plaintext_wake_command_obtained",
+      "evidence": "cloud_control_payload.json",
+      "control_records": [
+        {
+          "at": 1793389359.349881,
+          "kind": "TLS_record",
+          "bytes": 138,
+          "complete": true
+        }
+      ],
+      "replay_performed": false,
+      "finding": "Wake-correlated downlink is a complete TLS record; later empty packets are TCP handshakes, not demonstrated wake commands."
+    },
+    {
+      "id": "openipc_thingino_uart_firmware",
+      "status": "blocked_exact_board_support_and_physical_prerequisites",
+      "source_audit": [
+        {
+          "project": "thingino",
+          "saved_path": "/tmp/ha-cateye-local-20261031/research/thingino-tree.json",
+          "bytes": 881697,
+          "lines": 1,
+          "tree_truncated": false,
+          "exact_model_named_paths": [],
+          "generic_t40_paths_exist": true,
+          "limit": "Directory/tree search does not prove the absence of future ports or private board support."
+        },
+        {
+          "project": "openipc",
+          "saved_path": "/tmp/ha-cateye-local-20261031/research/openipc-tree.json",
+          "bytes": 1336252,
+          "lines": 1,
+          "tree_truncated": false,
+          "exact_model_named_paths": [],
+          "generic_t40_paths_exist": true,
+          "limit": "Directory/tree search does not prove the absence of future ports or private board support."
+        }
+      ],
+      "flashing_performed": false,
+      "reset_performed": false,
+      "requires": [
+        "exact board identification and flash backup",
+        "matching sensor/LCD/BL616 and power management integration",
+        "physical recovery access and explicit firmware-change authorization"
+      ]
+    },
+    {
+      "id": "unmodified_native_mihome_login_frontend",
+      "status": "blocked_missing_native_account_session",
+      "finding": "Existing OAuth adapters work, but old native API endpoints return HTTP 404 and no existing native Mi Home session was found in scoped NVR/HA configs.",
+      "limit": "Not tested as an unmodified account-login flow; does not negate the adapted end-to-end PR transport result."
+    }
+  ],
+  "ha_existing_path_acceptance": {
+    "at": 1793385286.5032597,
+    "path": "existing_HA_prepare_media_rekey_stop",
+    "browser_measurement": false,
+    "rekey_calls": 1,
+    "stages": [
+      {
+        "attempt": 1,
+        "started_ms": 486,
+        "error_flags": {
+          "auth": false,
+          "timeout": true,
+          "no answer from camera": false
+        },
+        "failed_ms": 5491
+      },
+      {
+        "attempt": 2,
+        "started_ms": 6777,
+        "decoded_frames": 15,
+        "first_decoded_ms": 9423,
+        "size": [
+          640,
+          480
+        ]
+      }
+    ],
+    "prepare_status": 200,
+    "prepare": {
+      "ready": true,
+      "prepare_ms": 484,
+      "used_cached_session": true
+    },
+    "rekey_status": 200,
+    "rekey_ms": 1286,
+    "success": true,
+    "stop_status": 200,
+    "stop_ms": 7,
+    "elapsed_ms": 10309,
+    "viewer_active_after_stop": false
+  },
+  "final_idle": {
+    "at": 1793390308.1161296,
+    "streams": {
+      "cateye_live": {
+        "producers": 0,
+        "consumers": 0
+      },
+      "cateye_local": {
+        "producers": 0,
+        "consumers": 0
+      }
+    },
+    "viewer_active": false,
+    "wake_policy": "cloud_on_demand",
+    "remaining_test_workers": []
+  },
+  "native_cleanup": {
+    "remaining_native_test_containers": [],
+    "temporary_auth_files_removed": [
+      "host_test/auth.json",
+      "cache_test/auth.json",
+      "cold_test/auth.json",
+      "auth.json"
+    ],
+    "private_log_files_redacted": 0,
+    "ble_report_owner_restored": true,
+    "test_firewall_table_absent": true,
+    "production_credentials_changed": false
+  },
+  "production_backend_replaced": false,
+  "production_video_credentials_refreshed_via_existing_rekey": true,
+  "timing_limit": "All new timings are protocol/decode observations, not browser-presented frames or percentile guarantees."
+}

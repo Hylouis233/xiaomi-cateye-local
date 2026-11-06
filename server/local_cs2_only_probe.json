@@ -1,0 +1,9 @@
+{
+  "at": 1793355585.1777356,
+  "cloud_wake_sent": false,
+  "miio_wake_sent": false,
+  "error": "RuntimeError",
+  "elapsed_ms": 1073,
+  "local_only_success": false,
+  "idle_status": 200
+}

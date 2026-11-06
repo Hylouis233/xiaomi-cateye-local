@@ -1,0 +1,8 @@
+{
+  "at": 1793357200.7256188,
+  "candidate": "cloud_rpc_wakeup_host",
+  "video_route": "LAN_only",
+  "error": "MIoTHttpError",
+  "elapsed_ms": 176,
+  "idle_status": 200
+}

@@ -1,0 +1,34 @@
+{
+  "at": 1793351142.1644042,
+  "actual_browser_metrics": {
+    "at": 1793351131.7949235,
+    "transport": "mse",
+    "client": "ha_native_mse",
+    "video_path": "ha_same_origin",
+    "codec": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+    "fps": 11,
+    "frames": 334,
+    "buffer_ms": 1196,
+    "first_frame_ms": 12892,
+    "prepare_ms": 8383,
+    "negotiated_ms": null,
+    "dropped_frames": 0,
+    "waits": 0,
+    "catchups": 0
+  },
+  "stop": {
+    "at": 1793351133.6663098,
+    "reason": "render",
+    "elapsed_ms": 45262
+  },
+  "streams": {
+    "cateye_live": {
+      "active": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active": 0,
+      "consumers": 0
+    }
+  }
+}

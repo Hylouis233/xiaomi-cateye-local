@@ -1,0 +1,16 @@
+{
+  "ha_lan": {
+    "status": 200,
+    "manifest_ms": 252,
+    "segment_bytes": 111663,
+    "segment_ttfb_ms": 238,
+    "segment_total_ms": 240
+  },
+  "public_entry_from_router": {
+    "status": 200,
+    "manifest_ms": 251,
+    "segment_bytes": 111663,
+    "segment_ttfb_ms": 248,
+    "segment_total_ms": 254
+  }
+}

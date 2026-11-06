@@ -1,0 +1,91 @@
+{
+  "at": 1793356831.4315116,
+  "prepare_status": 200,
+  "prepare": {
+    "ready": true,
+    "prepare_ms": 1095,
+    "used_cached_session": true
+  },
+  "prepare_ms": 1098,
+  "mime": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+  "first_media_ms": 8457,
+  "decoded_frames": 13,
+  "stop_status": 200,
+  "stop_ms": 7,
+  "wake": {
+    "at": 1793356831.4346883,
+    "no_wake": false,
+    "wake_policy": "cloud_on_demand",
+    "cloud_wake_ms": 1082,
+    "elapsed_ms": 1087,
+    "used_cached_session": true,
+    "total_ms": 1087
+  },
+  "media": {
+    "at": 1793356839.8877184,
+    "prepare_ms": 1095,
+    "media_bridge_ms": 1097,
+    "upstream_ws_ms": 1098,
+    "media_mime_ms": 8454,
+    "first_fragment_ms": 8454
+  },
+  "source_phases": [
+    {
+      "at_ms": "1793356836537",
+      "phase": "lan_search",
+      "ms": "4005"
+    },
+    {
+      "at_ms": "1793356836680",
+      "phase": "lan_ready",
+      "ms": "143"
+    },
+    {
+      "at_ms": "1793356836680",
+      "phase": "transport",
+      "ms": "4149"
+    },
+    {
+      "at_ms": "1793356837146",
+      "phase": "auth_send_ack",
+      "ms": "465"
+    },
+    {
+      "at_ms": "1793356837871",
+      "phase": "auth_reply",
+      "ms": "724"
+    },
+    {
+      "at_ms": "1793356837871",
+      "phase": "login",
+      "ms": "1190",
+      "protocol": "cs2+udp"
+    },
+    {
+      "at_ms": "1793356837880",
+      "phase": "start_media",
+      "ms": "9"
+    },
+    {
+      "at_ms": "1793356838147",
+      "phase": "first_packet",
+      "ms": "267"
+    },
+    {
+      "at_ms": "1793356839887",
+      "phase": "first_video",
+      "ms": "2006",
+      "first_nalu": "32"
+    },
+    {
+      "at_ms": "1793356839887",
+      "phase": "video_header",
+      "ms": "2007"
+    },
+    {
+      "at_ms": "1793356839887",
+      "phase": "source_ready",
+      "ms": "7355"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+template:
+  - triggers:
+      - trigger: state
+        entity_id: sensor.cateye_last_recognized_face
+    conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state is not none and trigger.to_state.state not in ['unknown', 'unavailable', '', 'None', 'none'] }}"
+    sensor:
+      - name: 猫眼最近识别人脸
+        unique_id: cateye_last_recognized_face_history
+        icon: mdi:face-recognition
+        state: "{{ trigger.to_state.state }}"
+        attributes:
+          recognized_at: "{{ now().isoformat() }}"

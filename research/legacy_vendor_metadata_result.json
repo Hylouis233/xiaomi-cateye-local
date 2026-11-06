@@ -1,0 +1,13 @@
+{
+  "at": 1793379895.0880644,
+  "cloud_wake_sent": false,
+  "external_metadata_request": true,
+  "key_pair_reused": true,
+  "production_credentials_changed": false,
+  "error": "MIoTHttpError",
+  "code": -10000,
+  "http_status": 404,
+  "response_code": null,
+  "unauthorized": false,
+  "elapsed_ms": 168
+}

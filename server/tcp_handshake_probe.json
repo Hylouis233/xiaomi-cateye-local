@@ -1,0 +1,37 @@
+{
+  "at": 1793355365.304797,
+  "prepare_status": 200,
+  "prepare": {
+    "ready": true,
+    "prepare_ms": 856,
+    "used_cached_session": true
+  },
+  "prepare_ms": 859,
+  "error": "RuntimeError",
+  "stop_status": 200,
+  "stop_ms": 24,
+  "wake": {
+    "at": 1793355365.3086975,
+    "no_wake": false,
+    "wake_policy": "cloud_on_demand",
+    "cloud_wake_ms": 845,
+    "elapsed_ms": 850,
+    "used_cached_session": true,
+    "total_ms": 850
+  },
+  "media": {
+    "at": 1793355198.4976819,
+    "prepare_ms": 1068,
+    "media_bridge_ms": 1069,
+    "upstream_ws_ms": 1071,
+    "media_mime_ms": 11068,
+    "first_fragment_ms": 11069
+  },
+  "source_phases": [
+    {
+      "at_ms": "1793355369586",
+      "phase": "lan_search",
+      "ms": "3418"
+    }
+  ]
+}

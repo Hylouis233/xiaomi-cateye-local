@@ -1,0 +1,70 @@
+{
+  "at": 1793380153.3295999,
+  "phase": "finished",
+  "cloud_wake_calls": 1,
+  "cloud_key_refresh_calls": 0,
+  "media_requested": false,
+  "local_observed_ports": [
+    {
+      "port": 26568,
+      "ms": 5183
+    },
+    {
+      "port": 19615,
+      "ms": 6249
+    }
+  ],
+  "local_probe_sends": [
+    {
+      "ms": 5485,
+      "port": 26568
+    },
+    {
+      "ms": 5485,
+      "port": 32108
+    },
+    {
+      "ms": 6237,
+      "port": 26568
+    },
+    {
+      "ms": 6237,
+      "port": 32108
+    },
+    {
+      "ms": 6525,
+      "port": 26568
+    },
+    {
+      "ms": 6525,
+      "port": 32108
+    },
+    {
+      "ms": 6525,
+      "port": 19615
+    }
+  ],
+  "local_replies": [
+    {
+      "ms": 6529,
+      "kind": "0x41",
+      "port": 19615,
+      "length": 24
+    },
+    {
+      "ms": 6827,
+      "kind": "0x42",
+      "port": 19615,
+      "length": 24
+    }
+  ],
+  "external_coordination": [],
+  "observed_server_count": 3,
+  "wake_at": 1793380153.809985,
+  "wake_accepted": true,
+  "cloud_wake_ms": 1109,
+  "ready_ms": 6827,
+  "ready_port": 19615,
+  "elapsed_ms": 6827,
+  "raw_control_count": 10
+}

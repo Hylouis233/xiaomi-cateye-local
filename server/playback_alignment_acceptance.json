@@ -1,0 +1,41 @@
+{
+  "at": 1793347611.6025395,
+  "resource": "/local/cateye-expand-card.js?v=20261030-9",
+  "replay_module_version": "20261030-3",
+  "inline_views": {
+    "continuous": "custom:nvr-playback-card",
+    "events": "custom:nvr-playback-card",
+    "media": "custom:nvr-playback-card"
+  },
+  "cateye_inline_type": "custom:nvr-playback-card",
+  "browser_checks": {
+    "room_recording_played": true,
+    "cateye_recording_played": true,
+    "event_with_face_label_played": true,
+    "locate_by_time": true,
+    "seek_forward_10_seconds": true,
+    "playback_rate_2x_readback": true,
+    "previous_day_clears_player": true,
+    "camera_change_clears_player": true,
+    "cateye_empty_events_message": true,
+    "clip_pagination": true,
+    "close_clears_player": true
+  },
+  "browser_ready_ms_samples": {
+    "room_window": 1205,
+    "cateye_clip": 405,
+    "event_clip": 1603,
+    "locate": 403
+  },
+  "streams_after_replay_tests": {
+    "cateye_live": {
+      "active_producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active_producers": 0,
+      "consumers": 0
+    }
+  },
+  "scope": "existing local recordings only; no camera wake; no NVR restart; public WAN unmeasured"
+}

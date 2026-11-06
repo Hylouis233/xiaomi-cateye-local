@@ -1,0 +1,97 @@
+[
+  {
+    "name": "battery",
+    "code": 0,
+    "value": 75
+  },
+  {
+    "name": "charging",
+    "code": 0,
+    "value": "0"
+  },
+  {
+    "name": "sd_state",
+    "code": 0,
+    "value": "0"
+  },
+  {
+    "name": "sd_capacity",
+    "code": 0,
+    "value": "30519616"
+  },
+  {
+    "name": "sd_free",
+    "code": 0,
+    "value": "30177739"
+  },
+  {
+    "name": "eco",
+    "code": 0,
+    "value": "false"
+  },
+  {
+    "name": "motion_enable",
+    "code": 0,
+    "value": "true"
+  },
+  {
+    "name": "detection_interval",
+    "code": 0,
+    "value": "0"
+  },
+  {
+    "name": "sensitivity",
+    "code": 0,
+    "value": "2"
+  },
+  {
+    "name": "max_video_length",
+    "code": 0,
+    "value": "30"
+  },
+  {
+    "name": "auto_reply",
+    "code": 0,
+    "value": "false"
+  },
+  {
+    "name": "reply_content",
+    "code": 0,
+    "value": "1_URL"
+  },
+  {
+    "name": "quiet_mode",
+    "code": 0,
+    "value": "false"
+  },
+  {
+    "name": "quiet_schedule",
+    "code": 0,
+    "value": "20:00-06:00"
+  },
+  {
+    "name": "screen_timeout",
+    "code": 0,
+    "value": "30"
+  },
+  {
+    "name": "max_screen_on",
+    "code": -704030023,
+    "value": null
+  },
+  {
+    "name": "tamper_alarm",
+    "code": 0,
+    "value": "true"
+  },
+  {
+    "name": "native_face_detection",
+    "code": -704030023,
+    "value": null
+  },
+  {
+    "name": "vehicle_detection",
+    "code": -704030023,
+    "value": null
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "at": 1793383137.6295266,
+  "scan_kind": "passive_receive_only",
+  "device_connections": 0,
+  "camera_control_writes": 0,
+  "advertisement_count": 305,
+  "xiaomi_service_count": 0,
+  "camera_address_matches": 0,
+  "services_seen": {
+    "f7fd": 42
+  },
+  "stage": "enable_passive_scan",
+  "read_info_status": 0,
+  "original_powered": false,
+  "original_le": false,
+  "controller_supports_le": true,
+  "enable_le_status": 0,
+  "power_on_status": 0,
+  "passive_parameters_status": 0,
+  "scan_enable_status": 0,
+  "scan_duration_s": 8,
+  "scan_disable_status": 0,
+  "power_restore_status": 0,
+  "le_restore_status": 0,
+  "final_powered": false,
+  "final_le": false,
+  "adapter_restored": true,
+  "adapter_modified": true
+}

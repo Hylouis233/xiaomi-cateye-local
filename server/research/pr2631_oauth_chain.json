@@ -1,0 +1,61 @@
+{
+  "at": 1793382534.102697,
+  "phase": "finished",
+  "implementation": "PR2631 transport with OAuth wake/key adapters and LAN peer restriction",
+  "not_unmodified_native_mihome_login": true,
+  "media_policy": "camera_LAN_only",
+  "cloud_wake_calls": 1,
+  "video_key_requests": 1,
+  "production_credentials_changed": false,
+  "browser_measurement": false,
+  "wakeup_host_rpc": {
+    "type": "MIoTHttpError",
+    "code": -10000,
+    "http_status": 404
+  },
+  "cloud_wake_ms": 346,
+  "post_wake_pause_s": 3,
+  "key_ms": 2935,
+  "credential_coordination_addresses_usable": false,
+  "coordination_source": "observed_actual_device_registration",
+  "coordination_server_count": 3,
+  "awake_tcp_ports": [
+    {
+      "port": 80,
+      "open": false
+    },
+    {
+      "port": 443,
+      "open": false
+    },
+    {
+      "port": 554,
+      "open": false
+    },
+    {
+      "port": 8554,
+      "open": false
+    },
+    {
+      "port": 8899,
+      "open": false
+    },
+    {
+      "port": 2020,
+      "open": false
+    },
+    {
+      "port": 8000,
+      "open": false
+    },
+    {
+      "port": 8080,
+      "open": false
+    }
+  ],
+  "decoded_frames": 9,
+  "first_decoded_ms": 9736,
+  "media_first_decoded_ms": 3155,
+  "test_engine_stopped": true,
+  "elapsed_ms": 9946
+}

@@ -1,0 +1,131 @@
+{
+  "objective": "Exhaust documented, non-destructive integration routes for midr.cateye.ph300 using existing authorized devices and credentials. Find a usable local path or document exact remaining blockers.",
+  "constraints": [
+    "Media must stay on LAN",
+    "No always-on camera or idle video polling",
+    "Short, bounded cloud wakes allowed for comparison and fallback",
+    "No MuMu",
+    "Do not replace a partial test with an end-to-end claim"
+  ],
+  "acceptance": [
+    "Record wake method and whether it used cloud",
+    "Decode actual frames for a claimed working video route",
+    "Record shutdown and idle readback",
+    "Separately verify cold/idle reuse",
+    "Preserve UNKNOWN for missing credentials, hardware or untested firmware changes"
+  ],
+  "routes": [
+    {
+      "id": "pr2631_oauth_adapted",
+      "status": "working_short_frame_sample",
+      "evidence": "pr2631_oauth_chain.json"
+    },
+    {
+      "id": "official_native_sdk",
+      "status": "working_short_frame_sample",
+      "evidence": "isolation_host_after_prepare.json"
+    },
+    {
+      "id": "official_sdk_without_explicit_wake",
+      "status": "tested_no_frames",
+      "evidence": "isolation_host_without_wake.json"
+    },
+    {
+      "id": "official_sdk_cached_manager_local_only",
+      "status": "tested_no_frames",
+      "evidence": "isolation_host_cache_reuse.json"
+    },
+    {
+      "id": "miio_wake_action",
+      "status": "tested_busy",
+      "evidence": "findings.json"
+    },
+    {
+      "id": "miio_screen_wake",
+      "status": "tested_busy",
+      "evidence": "local_screen_wake_probe.json"
+    },
+    {
+      "id": "local_start_p2p_and_vendor_wake_methods",
+      "status": "tested_not_successful",
+      "evidence": "local_wake_research.json"
+    },
+    {
+      "id": "cached_dynamic_port_after_idle",
+      "status": "tested_no_handshake",
+      "evidence": "dynamic_port_experiments.json"
+    },
+    {
+      "id": "standard_wowlan_magic",
+      "status": "exploratory_test_no_video",
+      "evidence": "local_magic_wake_probe.json"
+    },
+    {
+      "id": "cs2_introduction_without_wake",
+      "status": "tested_no_ready_peer",
+      "evidence": "dynamic_port_experiments.json"
+    },
+    {
+      "id": "cached_pr_credentials",
+      "status": "cached_auth_rejected_one_sample",
+      "evidence": "pr2631_cached_chain.json"
+    },
+    {
+      "id": "hass_xiaomi_miot",
+      "status": "source_equivalent_not_separately_deployed",
+      "evidence": [
+        "hass-miot-device.py:1225",
+        "hass-miot-customizes.py:3319",
+        "hass-miio2miot.py:43"
+      ]
+    },
+    {
+      "id": "miloco_micam_complete_stack",
+      "status": "same_native_transport_not_separately_deployed",
+      "evidence": [
+        "miloco-camera-extra.yaml",
+        "micam-init.py",
+        "micam-README.md"
+      ]
+    },
+    {
+      "id": "native_rtsp_onvif_homekit",
+      "status": "no_standard_service_found_in_test_window",
+      "evidence": [
+        "pr2631_oauth_chain.json",
+        "camera_standard_discovery.json"
+      ]
+    },
+    {
+      "id": "central_hub_mips",
+      "status": "blocked_no_eligible_hub_discovered",
+      "evidence": [
+        "authorized_hub_inventory_complete.json",
+        "mips_hub_discovery.json"
+      ]
+    },
+    {
+      "id": "bluetooth_local",
+      "status": "blocked_no_identified_endpoint_or_published_wake_command",
+      "evidence": "passive_ble_probe.json"
+    },
+    {
+      "id": "cloud_command_local_replay",
+      "status": "blocked_no_plaintext_wake_command_obtained",
+      "evidence": "cloud_control_payload.json"
+    },
+    {
+      "id": "openipc_thingino_uart_firmware",
+      "status": "blocked_exact_board_support_and_physical_prerequisites",
+      "evidence": []
+    },
+    {
+      "id": "unmodified_native_mihome_login_frontend",
+      "status": "blocked_missing_native_account_session",
+      "evidence": []
+    }
+  ],
+  "updated_at": 1793389998.880745,
+  "state": "tested_or_classified_with_explicit_remaining_prerequisites",
+  "universal_impossibility_claim": false
+}

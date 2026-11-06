@@ -1,0 +1,243 @@
+diff --git a/pkg/xiaomi/miss/client.go b/pkg/xiaomi/miss/client.go
+index 3113632..16d8297 100644
+--- a/pkg/xiaomi/miss/client.go
++++ b/pkg/xiaomi/miss/client.go
+@@ -37,6 +37,7 @@ type Conn interface {
+ }
+ 
+ func NewClient(rawURL string) (*Client, error) {
++	started := time.Now()
+ 	u, err := url.Parse(rawURL)
+ 	if err != nil {
+ 		return nil, err
+@@ -66,11 +67,14 @@ func NewClient(rawURL string) (*Client, error) {
+ 		return nil, err
+ 	}
+ 
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=transport ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++	loginStarted := time.Now()
+ 	err = login(conn, query.Get("client_public"), query.Get("sign"))
+ 	if err != nil {
+ 		_ = conn.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=login ms=%d protocol=%s\n", time.Now().UnixMilli(), time.Since(loginStarted).Milliseconds(), conn.Protocol())
+ 
+ 	return &Client{Conn: conn, key: key, model: model}, nil
+ }
+diff --git a/pkg/xiaomi/miss/cs2/conn.go b/pkg/xiaomi/miss/cs2/conn.go
+index 2c1b395..7a8ea6f 100644
+--- a/pkg/xiaomi/miss/cs2/conn.go
++++ b/pkg/xiaomi/miss/cs2/conn.go
+@@ -62,6 +62,7 @@ const (
+ )
+ 
+ func handshake(host, transport string) (net.Conn, error) {
++	started := time.Now()
+ 	conn, err := newUDPConn(host, 32108)
+ 	if err != nil {
+ 		return nil, err
+@@ -77,6 +78,8 @@ func handshake(host, transport string) (net.Conn, error) {
+ 		_ = conn.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=lan_search ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++	readyStarted := time.Now()
+ 
+ 	var msgUDP, msgTCP byte
+ 
+@@ -94,13 +97,17 @@ func handshake(host, transport string) (net.Conn, error) {
+ 		_ = conn.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=lan_ready ms=%d\n", time.Now().UnixMilli(), time.Since(readyStarted).Milliseconds())
+ 
+ 	_ = conn.SetDeadline(time.Time{})
+ 
+ 	if res[1] == msgTCP {
+ 		_ = conn.Close()
+ 		//host := fmt.Sprintf("%d.%d.%d.%d:%d", b[31], b[30], b[29], b[28], uint16(b[27])<<8|uint16(b[26]))
+-		return newTCPConn(conn.RemoteAddr().String())
++		tcpStarted := time.Now()
++		tcp, err := newTCPConn(conn.RemoteAddr().String())
++		fmt.Printf("CATEYE_PHASE at_ms=%d phase=tcp_connect ms=%d\n", time.Now().UnixMilli(), time.Since(tcpStarted).Milliseconds())
++		return tcp, err
+ 	}
+ 
+ 	return conn, nil
+diff --git a/pkg/xiaomi/miss/producer.go b/pkg/xiaomi/miss/producer.go
+index dcea284..a5bbdc7 100644
+--- a/pkg/xiaomi/miss/producer.go
++++ b/pkg/xiaomi/miss/producer.go
+@@ -1,6 +1,7 @@
+ package miss
+ 
+ import (
++	"encoding/binary"
+ 	"fmt"
+ 	"net/url"
+ 	"time"
+@@ -14,10 +15,12 @@ import (
+ 
+ type Producer struct {
+ 	core.Connection
+-	client *Client
++	client  *Client
++	initial []*Packet
+ }
+ 
+ func Dial(rawURL string) (core.Producer, error) {
++	started := time.Now()
+ 	client, err := NewClient(rawURL)
+ 	if err != nil {
+ 		return nil, err
+@@ -26,17 +29,20 @@ func Dial(rawURL string) (core.Producer, error) {
+ 	u, _ := url.Parse(rawURL)
+ 	query := u.Query()
+ 
++	mediaStarted := time.Now()
+ 	err = client.StartMedia(query.Get("channel"), query.Get("subtype"), query.Get("audio"))
+ 	if err != nil {
+ 		_ = client.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=start_media ms=%d\n", time.Now().UnixMilli(), time.Since(mediaStarted).Milliseconds())
+ 
+-	medias, err := probe(client, query.Get("audio") != "0")
++	medias, initial, err := probe(client, query.Get("audio") != "0")
+ 	if err != nil {
+ 		_ = client.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=source_ready ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
+ 
+ 	return &Producer{
+ 		Connection: core.Connection{
+@@ -48,14 +54,20 @@ func Dial(rawURL string) (core.Producer, error) {
+ 			Medias:     medias,
+ 			Transport:  client,
+ 		},
+-		client: client,
++		client:  client,
++		initial: initial,
+ 	}, nil
+ }
+ 
+-func probe(client *Client, audio bool) ([]*core.Media, error) {
++func probe(client *Client, audio bool) ([]*core.Media, []*Packet, error) {
++	started := time.Now()
++	firstPacket := true
++	firstVideo := true
+ 	_ = client.SetDeadline(time.Now().Add(15 * time.Second))
+ 
+ 	var vcodec, acodec *core.Codec
++	var initial []*Packet
++	var initialBytes int
+ 
+ 	for {
+ 		pkt, err := client.ReadPacket()
+@@ -65,21 +77,34 @@ func probe(client *Client, audio bool) ([]*core.Media, error) {
+ 			} else if acodec != nil {
+ 				err = fmt.Errorf("no video")
+ 			}
+-			return nil, fmt.Errorf("xiaomi: probe: %w", err)
++			return nil, nil, fmt.Errorf("xiaomi: probe: %w", err)
+ 		}
++		if firstPacket {
++			fmt.Printf("CATEYE_PHASE at_ms=%d phase=first_packet ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++			firstPacket = false
++		}
++		hadVideo := vcodec != nil
+ 
+ 		switch pkt.CodecID {
+ 		case codecH264:
+ 			if vcodec == nil {
+ 				buf := annexb.EncodeToAVCC(pkt.Payload)
+-				if h264.NALUType(buf) == h264.NALUTypeSPS {
++				if firstVideo {
++					fmt.Printf("CATEYE_PHASE at_ms=%d phase=first_video ms=%d first_nalu=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds(), h264.NALUType(buf))
++					firstVideo = false
++				}
++				if containsNALU(buf, h264.NALUTypeSPS, false) {
+ 					vcodec = h264.AVCCToCodec(buf)
+ 				}
+ 			}
+ 		case codecH265:
+ 			if vcodec == nil {
+ 				buf := annexb.EncodeToAVCC(pkt.Payload)
+-				if h265.NALUType(buf) == h265.NALUTypeVPS {
++				if firstVideo {
++					fmt.Printf("CATEYE_PHASE at_ms=%d phase=first_video ms=%d first_nalu=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds(), h265.NALUType(buf))
++					firstVideo = false
++				}
++				if containsNALU(buf, h265.NALUTypeVPS, true) {
+ 					vcodec = h265.AVCCToCodec(buf)
+ 				}
+ 			}
+@@ -93,6 +118,16 @@ func probe(client *Client, audio bool) ([]*core.Media, error) {
+ 			}
+ 		}
+ 
++		if vcodec != nil {
++			if !hadVideo {
++				fmt.Printf("CATEYE_PHASE at_ms=%d phase=video_header ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++			}
++			initialBytes += len(pkt.Payload)
++			if initialBytes > 4*1024*1024 {
++				return nil, nil, fmt.Errorf("xiaomi: probe: initial media exceeds limit")
++			}
++			initial = append(initial, pkt)
++		}
+ 		if vcodec != nil && (acodec != nil || !audio) {
+ 			break
+ 		}
+@@ -122,19 +157,44 @@ func probe(client *Client, audio bool) ([]*core.Media, error) {
+ 		})
+ 	}
+ 
+-	return medias, nil
++	return medias, initial, nil
+ }
+ 
+ const timestamp40ms = 48000 * 0.040
+ 
++// Access units may begin with AUD/SEI before the codec parameter sets.
++func containsNALU(data []byte, want byte, hevc bool) bool {
++	for len(data) >= 5 {
++		size := int(binary.BigEndian.Uint32(data))
++		if size < 1 || size > len(data)-4 {
++			return false
++		}
++		typ := data[4] & 0x1F
++		if hevc {
++			typ = data[4] >> 1 & 0x3F
++		}
++		if typ == want {
++			return true
++		}
++		data = data[4+size:]
++	}
++	return false
++}
++
+ func (p *Producer) Start() error {
+ 	var audioTS uint32
+ 
+ 	for {
+-		_ = p.client.SetDeadline(time.Now().Add(10 * time.Second))
+-		pkt, err := p.client.ReadPacket()
+-		if err != nil {
+-			return err
++		var pkt *Packet
++		if len(p.initial) > 0 {
++			pkt, p.initial = p.initial[0], p.initial[1:]
++		} else {
++			_ = p.client.SetDeadline(time.Now().Add(10 * time.Second))
++			var err error
++			pkt, err = p.client.ReadPacket()
++			if err != nil {
++				return err
++			}
+ 		}
+ 
+ 		p.Recv += len(pkt.Payload)

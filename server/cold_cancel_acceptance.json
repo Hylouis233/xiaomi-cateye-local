@@ -1,0 +1,7 @@
+{
+  "stop_status": 200,
+  "stop_ms": 9,
+  "prepare_result": "ServerDisconnectedError",
+  "late_rekey_status": 410,
+  "idle": true
+}

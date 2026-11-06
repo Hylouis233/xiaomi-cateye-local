@@ -1,0 +1,30 @@
+[
+  {
+    "mode": "hevc",
+    "prepare_status": 200,
+    "prepare_ms": 8917,
+    "mime": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+    "first_media_ms": 11286,
+    "bytes": 123646,
+    "decoded_frames": 83,
+    "size": [
+      640,
+      480
+    ],
+    "stop_ms": 9
+  },
+  {
+    "mode": "h264",
+    "prepare_status": 200,
+    "prepare_ms": 9444,
+    "mime": "video/mp4; codecs=\"avc1.42001F\"",
+    "first_media_ms": 16902,
+    "bytes": 545538,
+    "decoded_frames": 68,
+    "size": [
+      640,
+      480
+    ],
+    "stop_ms": 9
+  }
+]

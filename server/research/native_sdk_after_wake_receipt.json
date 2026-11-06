@@ -1,0 +1,10 @@
+{
+  "at": 1793381678.2850285,
+  "phase": "response_received",
+  "purpose": "native_sdk_after_wake",
+  "cloud_wake_calls": 1,
+  "cloud_key_refresh_calls": 0,
+  "stream_started": false,
+  "accepted": true,
+  "elapsed_ms": 1148
+}

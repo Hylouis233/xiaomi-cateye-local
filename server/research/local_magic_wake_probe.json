@@ -1,0 +1,61 @@
+{
+  "at": 1793384064.9637306,
+  "hypothesis": "standard_WoWLAN_magic_packet_not_model_documented",
+  "cloud_called": false,
+  "persistent_settings_changed": false,
+  "target_camera_mac": "XX:XX:XX:XX:XX:XX",
+  "packets_sent": [
+    {
+      "kind": "udp_magic",
+      "destination": "192.168.1.255",
+      "port": 9
+    },
+    {
+      "kind": "udp_magic",
+      "destination": "192.168.1.210",
+      "port": 9
+    },
+    {
+      "kind": "ethernet_magic",
+      "ether_type": "0x0842"
+    }
+  ],
+  "local_media_exit_code": 0,
+  "local_media": {
+    "at": 1793384071.5995128,
+    "mode": "awake_no_wake",
+    "cloud_wake_sent": false,
+    "cloud_key_request_sent": false,
+    "cached_credentials": true,
+    "video_path": "direct_lan_cs2",
+    "browser_measurement": false,
+    "before": {
+      "cateye_live": {
+        "active_producers": 0,
+        "consumers": 0
+      },
+      "cateye_local": {
+        "active_producers": 0,
+        "consumers": 0
+      }
+    },
+    "before_media_ms": 1,
+    "media_error": true,
+    "error": "RuntimeError",
+    "test_elapsed_ms": 5005,
+    "delete_status": 200,
+    "idle_status": 200,
+    "stop_ms": 24,
+    "after": {
+      "cateye_live": {
+        "active_producers": 0,
+        "consumers": 0
+      },
+      "cateye_local": {
+        "active_producers": 0,
+        "consumers": 0
+      }
+    },
+    "source_phases": []
+  }
+}

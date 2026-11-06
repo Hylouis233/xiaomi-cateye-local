@@ -1,0 +1,10 @@
+{
+  "at": 1793379999.5509562,
+  "phase": "response_received",
+  "purpose": "bounded_dynamic_port_comparison",
+  "cloud_wake_calls": 1,
+  "cloud_key_refresh_calls": 0,
+  "stream_started": false,
+  "accepted": true,
+  "elapsed_ms": 742
+}

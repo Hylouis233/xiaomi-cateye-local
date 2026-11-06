@@ -1,0 +1,91 @@
+{
+  "at": 1793345997.5437582,
+  "resource_version": "20261030-6",
+  "current_ui": "expanded_idle",
+  "browser_checks": {
+    "default_expanded_without_connect": true,
+    "cateye_native_hevc_played": true,
+    "cateye_recording_played_inline": true,
+    "room_recording_played": true,
+    "cancel_prepare_on_collapse": true,
+    "reopen_does_not_connect": true
+  },
+  "streams_after_cancellation": {
+    "cateye_live": {
+      "active_producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active_producers": 0,
+      "consumers": 0
+    }
+  },
+  "live_metrics": {
+    "at": 1793345543.2938137,
+    "transport": "mse",
+    "client": "ha_native_mse",
+    "video_path": "ha_same_origin",
+    "codec": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+    "fps": null,
+    "frames": 290,
+    "buffer_ms": 109,
+    "first_frame_ms": 10220,
+    "prepare_ms": 7713,
+    "negotiated_ms": null
+  },
+  "stopped_by": {
+    "at": 1793345883.4549217,
+    "reason": "render",
+    "elapsed_ms": 4913
+  },
+  "viewer_activity": {
+    "active": false,
+    "at": 1793345883.4560351
+  },
+  "ha_playback_latency": {
+    "ha_lan": {
+      "status": 200,
+      "manifest_ms": 252,
+      "segment_bytes": 111663,
+      "segment_ttfb_ms": 238,
+      "segment_total_ms": 240
+    },
+    "public_entry_from_router": {
+      "status": 200,
+      "manifest_ms": 251,
+      "segment_bytes": 111663,
+      "segment_ttfb_ms": 248,
+      "segment_total_ms": 254
+    }
+  },
+  "same_origin_acceptance": [
+    {
+      "mode": "hevc",
+      "prepare_status": 200,
+      "prepare_ms": 8917,
+      "mime": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+      "first_media_ms": 11286,
+      "bytes": 123646,
+      "decoded_frames": 83,
+      "size": [
+        640,
+        480
+      ],
+      "stop_ms": 9
+    },
+    {
+      "mode": "h264",
+      "prepare_status": 200,
+      "prepare_ms": 9444,
+      "mime": "video/mp4; codecs=\"avc1.42001F\"",
+      "first_media_ms": 16902,
+      "bytes": 545538,
+      "decoded_frames": 68,
+      "size": [
+        640,
+        480
+      ],
+      "stop_ms": 9
+    }
+  ]
+}

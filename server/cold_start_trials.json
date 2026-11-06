@@ -1,0 +1,75 @@
+{
+  "baseline_browser": {
+    "at": 1793351142.1644042,
+    "actual_browser_metrics": {
+      "at": 1793351131.7949235,
+      "transport": "mse",
+      "client": "ha_native_mse",
+      "video_path": "ha_same_origin",
+      "codec": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+      "fps": 11,
+      "frames": 334,
+      "buffer_ms": 1196,
+      "first_frame_ms": 12892,
+      "prepare_ms": 8383,
+      "negotiated_ms": null,
+      "dropped_frames": 0,
+      "waits": 0,
+      "catchups": 0
+    },
+    "stop": {
+      "at": 1793351133.6663098,
+      "reason": "render",
+      "elapsed_ms": 45262
+    },
+    "streams": {
+      "cateye_live": {
+        "active": 0,
+        "consumers": 0
+      },
+      "cateye_local": {
+        "active": 0,
+        "consumers": 0
+      }
+    }
+  },
+  "early_key_request_trial": {
+    "wake": {
+      "at": 1793351484.011259,
+      "no_wake": false,
+      "local_error": "DeviceError",
+      "local_wake_ms": 702,
+      "elapsed_ms": 8212,
+      "cloud_wake_ms": 1135,
+      "key_attempts": 2,
+      "key_ms": 6369,
+      "total_ms": 8212
+    },
+    "browser": {
+      "at": 1793351524.8581598,
+      "transport": "mse",
+      "client": "ha_native_mse",
+      "video_path": "ha_same_origin",
+      "codec": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+      "fps": 11,
+      "frames": 299,
+      "buffer_ms": 477,
+      "first_frame_ms": 13202,
+      "prepare_ms": 9193,
+      "negotiated_ms": null,
+      "dropped_frames": 1,
+      "waits": 1,
+      "catchups": 0
+    }
+  },
+  "cached_credential_diagnostic": {
+    "at": 1793351620.4390469,
+    "credential_age_s": 128,
+    "wake": "authorized_cloud_fallback",
+    "wake_ms": 1717,
+    "first_media_ms": 9590,
+    "frames": 9,
+    "cache_valid": true,
+    "idle_status": 200
+  }
+}

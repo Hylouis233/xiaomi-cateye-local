@@ -1,0 +1,22 @@
+{
+  "at": 1793383344.6382303,
+  "cloud_called": false,
+  "persistent_settings_changed": false,
+  "action": {
+    "siid": 2,
+    "aiid": 2,
+    "description": "Light Up Screen"
+  },
+  "declared_gatt_access_operations": 0,
+  "device_firmware": {
+    "model": "midr.cateye.ph300",
+    "fw_ver": "5.3.1_0347",
+    "hw_ver": "BL616_ECO",
+    "miio_ver": "0.0.9"
+  },
+  "error": "DeviceError",
+  "code": -30012,
+  "busy": true,
+  "accepted": false,
+  "elapsed_ms": 1003
+}

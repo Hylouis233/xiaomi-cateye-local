@@ -1,0 +1,13 @@
+{
+  "at": 1793388687.618155,
+  "camera_ip": "192.168.1.210",
+  "cloud_wake_sent": false,
+  "mdns_services": [],
+  "onvif_camera_responses": [],
+  "other_responses_discarded": 4,
+  "types_queried": [
+    "_rtsp._tcp.local.",
+    "_onvif._tcp.local.",
+    "_hap._tcp.local."
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "at": 1793357640.781466,
+  "wake_policy": {
+    "mode": "cloud_on_demand",
+    "at": 1793354786.9120557,
+    "reason": "Tested local miIO wake interfaces did not succeed on current firmware; user authorized direct cloud wake if local is unreliable. Video remains LAN.",
+    "local_research": "/config/cateye_local/local_wake_research.json"
+  },
+  "local_tests": {
+    "at": 1793354585.3445613,
+    "cloud_wake_sent": false,
+    "results": [
+      {
+        "method": "action",
+        "ms": 1301,
+        "success": false,
+        "error": "DeviceException"
+      },
+      {
+        "method": "wakeup_host",
+        "ms": 416,
+        "success": false,
+        "error": "DeviceError",
+        "code": -32602,
+        "message": "Invalid param."
+      },
+      {
+        "method": "wakeup",
+        "ms": 602,
+        "success": false,
+        "error": "DeviceException"
+      }
+    ],
+    "variants": [
+      {
+        "method": "wakeup_host",
+        "params_variant": "empty_list",
+        "ms": 656,
+        "success": false,
+        "error": "DeviceError",
+        "code": -32602,
+        "message": "Invalid param."
+      },
+      {
+        "method": "wakeup",
+        "params_variant": "empty_list",
+        "ms": 1602,
+        "success": false,
+        "error": "DeviceException"
+      },
+      {
+        "method": "action",
+        "params_variant": "action_did",
+        "ms": 1025,
+        "success": false,
+        "error": "DeviceException"
+      },
+      {
+        "method": "action",
+        "params_variant": "no_did",
+        "ms": 1024,
+        "success": false,
+        "error": "DeviceException"
+      }
+    ],
+    "p2p_action": {
+      "at": 1793355945.3945725,
+      "method": "local_start_p2p",
+      "cloud_wake_sent": false,
+      "error": "DeviceException",
+      "accepted": false,
+      "ms": 1215
+    }
+  },
+  "local_cs2_only": {
+    "at": 1793355585.1777356,
+    "cloud_wake_sent": false,
+    "miio_wake_sent": false,
+    "error": "RuntimeError",
+    "elapsed_ms": 1073,
+    "local_only_success": false,
+    "idle_status": 200
+  },
+  "browser": {
+    "armed_at": 1793357339.2960198,
+    "browser": {
+      "at": 1793357355.594879,
+      "transport": "mse",
+      "client": "ha_native_mse",
+      "video_path": "ha_same_origin",
+      "codec": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+      "fps": 10,
+      "frames": 31,
+      "buffer_ms": 1025,
+      "first_frame_ms": 8291,
+      "prepare_ms": 763,
+      "negotiated_ms": null,
+      "dropped_frames": 1,
+      "waits": 0,
+      "catchups": 0,
+      "media_bridge_ms": 841,
+      "media_mime_ms": 7838,
+      "first_fragment_ms": 7839,
+      "client_first_frame_ms": 8282
+    },
+    "wake": {
+      "at": 1793357344.816906,
+      "no_wake": false,
+      "wake_policy": "cloud_on_demand",
+      "cloud_wake_ms": 743,
+      "elapsed_ms": 752,
+      "used_cached_session": true,
+      "total_ms": 752
+    },
+    "stop_status": 200,
+    "stop_ms": 35
+  },
+  "protocol_latest": {
+    "at": 1793356831.4315116,
+    "prepare_status": 200,
+    "prepare": {
+      "ready": true,
+      "prepare_ms": 1095,
+      "used_cached_session": true
+    },
+    "prepare_ms": 1098,
+    "mime": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+    "first_media_ms": 8457,
+    "decoded_frames": 13,
+    "stop_status": 200,
+    "stop_ms": 7,
+    "wake": {
+      "at": 1793356831.4346883,
+      "no_wake": false,
+      "wake_policy": "cloud_on_demand",
+      "cloud_wake_ms": 1082,
+      "elapsed_ms": 1087,
+      "used_cached_session": true,
+      "total_ms": 1087
+    },
+    "media": {
+      "at": 1793356839.8877184,
+      "prepare_ms": 1095,
+      "media_bridge_ms": 1097,
+      "upstream_ws_ms": 1098,
+      "media_mime_ms": 8454,
+      "first_fragment_ms": 8454
+    },
+    "source_phases": [
+      {
+        "at_ms": "1793356836537",
+        "phase": "lan_search",
+        "ms": "4005"
+      },
+      {
+        "at_ms": "1793356836680",
+        "phase": "lan_ready",
+        "ms": "143"
+      },
+      {
+        "at_ms": "1793356836680",
+        "phase": "transport",
+        "ms": "4149"
+      },
+      {
+        "at_ms": "1793356837146",
+        "phase": "auth_send_ack",
+        "ms": "465"
+      },
+      {
+        "at_ms": "1793356837871",
+        "phase": "auth_reply",
+        "ms": "724"
+      },
+      {
+        "at_ms": "1793356837871",
+        "phase": "login",
+        "ms": "1190",
+        "protocol": "cs2+udp"
+      },
+      {
+        "at_ms": "1793356837880",
+        "phase": "start_media",
+        "ms": "9"
+      },
+      {
+        "at_ms": "1793356838147",
+        "phase": "first_packet",
+        "ms": "267"
+      },
+      {
+        "at_ms": "1793356839887",
+        "phase": "first_video",
+        "ms": "2006",
+        "first_nalu": "32"
+      },
+      {
+        "at_ms": "1793356839887",
+        "phase": "video_header",
+        "ms": "2007"
+      },
+      {
+        "at_ms": "1793356839887",
+        "phase": "source_ready",
+        "ms": "7355"
+      }
+    ]
+  },
+  "idle": {
+    "cateye_live": {
+      "active_producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active_producers": 0,
+      "consumers": 0
+    }
+  },
+  "viewer": {
+    "active": false,
+    "at": 1793357355.769675
+  },
+  "notes": [
+    "Single cold browser sample; no permanent camera connection or periodic wake.",
+    "Forced TCP and aggressive discovery were rejected; automatic TCP/UDP retained.",
+    "Browser first frame and server first media are separate metrics."
+  ]
+}

@@ -1,0 +1,540 @@
+{
+  "at": 1793382813.9176385,
+  "mode": "host_cache_reuse",
+  "dedicated_uid": 64071,
+  "network_mode": "host",
+  "media_policy": "LAN_only",
+  "firewall_scope": "only_dedicated_test_uid",
+  "cs2_control_allowed": true,
+  "public_cs2_drw_media_blocked": true,
+  "firewall_applied": true,
+  "network_check": {
+    "unapproved_wan_blocked": true
+  },
+  "prepare_started_at": 1793382814.7992363,
+  "router_prepare": {
+    "ready": true,
+    "prepare_ms": 470,
+    "used_cached_session": true
+  },
+  "idle_firewall_counters": {
+    "nftables": [
+      {
+        "metainfo": {
+          "version": "1.0.2",
+          "release_name": "Lester Gooch",
+          "json_schema_version": 1
+        }
+      },
+      {
+        "table": {
+          "family": "inet",
+          "name": "cateye_native_host_probe",
+          "handle": 11
+        }
+      },
+      {
+        "chain": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "name": "output",
+          "handle": 1,
+          "type": "filter",
+          "hook": "output",
+          "prio": -50,
+          "policy": "accept"
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "output",
+          "handle": 7,
+          "expr": [
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "meta": {
+                    "key": "skuid"
+                  }
+                },
+                "right": 64071
+              }
+            },
+            {
+              "mangle": {
+                "key": {
+                  "ct": {
+                    "key": "mark"
+                  }
+                },
+                "value": 3397280769
+              }
+            },
+            {
+              "jump": {
+                "target": "sdk"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chain": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "name": "sdk",
+          "handle": 2
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "sdk",
+          "handle": 16,
+          "expr": [
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "meta": {
+                    "key": "oifname"
+                  }
+                },
+                "right": "lo"
+              }
+            },
+            {
+              "counter": {
+                "packets": 30,
+                "bytes": 2142
+              }
+            },
+            {
+              "accept": null
+            }
+          ]
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "sdk",
+          "handle": 17,
+          "expr": [
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "payload": {
+                    "protocol": "ip",
+                    "field": "daddr"
+                  }
+                },
+                "right": "192.168.1.210"
+              }
+            },
+            {
+              "counter": {
+                "packets": 0,
+                "bytes": 0
+              }
+            },
+            {
+              "drop": null
+            }
+          ]
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "sdk",
+          "handle": 18,
+          "expr": [
+            {
+              "counter": {
+                "packets": 0,
+                "bytes": 0
+              }
+            },
+            {
+              "drop": null
+            }
+          ]
+        }
+      },
+      {
+        "chain": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "name": "input",
+          "handle": 3,
+          "type": "filter",
+          "hook": "input",
+          "prio": -50,
+          "policy": "accept"
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "input",
+          "handle": 15,
+          "expr": [
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "ct": {
+                    "key": "mark"
+                  }
+                },
+                "right": 3397280769
+              }
+            },
+            {
+              "match": {
+                "op": "!=",
+                "left": {
+                  "payload": {
+                    "protocol": "ip",
+                    "field": "saddr"
+                  }
+                },
+                "right": "192.168.1.210"
+              }
+            },
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "payload": {
+                    "base": "th",
+                    "offset": 64,
+                    "len": 16
+                  }
+                },
+                "right": 61904
+              }
+            },
+            {
+              "counter": {
+                "packets": 0,
+                "bytes": 0
+              }
+            },
+            {
+              "drop": null
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "native_exit_code": 0,
+  "firewall_counters": {
+    "nftables": [
+      {
+        "metainfo": {
+          "version": "1.0.2",
+          "release_name": "Lester Gooch",
+          "json_schema_version": 1
+        }
+      },
+      {
+        "table": {
+          "family": "inet",
+          "name": "cateye_native_host_probe",
+          "handle": 11
+        }
+      },
+      {
+        "chain": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "name": "output",
+          "handle": 1,
+          "type": "filter",
+          "hook": "output",
+          "prio": -50,
+          "policy": "accept"
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "output",
+          "handle": 7,
+          "expr": [
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "meta": {
+                    "key": "skuid"
+                  }
+                },
+                "right": 64071
+              }
+            },
+            {
+              "mangle": {
+                "key": {
+                  "ct": {
+                    "key": "mark"
+                  }
+                },
+                "value": 3397280769
+              }
+            },
+            {
+              "jump": {
+                "target": "sdk"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chain": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "name": "sdk",
+          "handle": 2
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "sdk",
+          "handle": 19,
+          "expr": [
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "meta": {
+                    "key": "oifname"
+                  }
+                },
+                "right": "lo"
+              }
+            },
+            {
+              "counter": {
+                "packets": 2,
+                "bytes": 152
+              }
+            },
+            {
+              "accept": null
+            }
+          ]
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "sdk",
+          "handle": 20,
+          "expr": [
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "payload": {
+                    "protocol": "ip",
+                    "field": "daddr"
+                  }
+                },
+                "right": "192.168.1.210"
+              }
+            },
+            {
+              "counter": {
+                "packets": 0,
+                "bytes": 0
+              }
+            },
+            {
+              "accept": null
+            }
+          ]
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "sdk",
+          "handle": 21,
+          "expr": [
+            {
+              "counter": {
+                "packets": 6,
+                "bytes": 360
+              }
+            },
+            {
+              "drop": null
+            }
+          ]
+        }
+      },
+      {
+        "chain": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "name": "input",
+          "handle": 3,
+          "type": "filter",
+          "hook": "input",
+          "prio": -50,
+          "policy": "accept"
+        }
+      },
+      {
+        "rule": {
+          "family": "inet",
+          "table": "cateye_native_host_probe",
+          "chain": "input",
+          "handle": 15,
+          "expr": [
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "ct": {
+                    "key": "mark"
+                  }
+                },
+                "right": 3397280769
+              }
+            },
+            {
+              "match": {
+                "op": "!=",
+                "left": {
+                  "payload": {
+                    "protocol": "ip",
+                    "field": "saddr"
+                  }
+                },
+                "right": "192.168.1.210"
+              }
+            },
+            {
+              "match": {
+                "op": "==",
+                "left": {
+                  "payload": {
+                    "base": "th",
+                    "offset": 64,
+                    "len": 16
+                  }
+                },
+                "right": 61904
+              }
+            },
+            {
+              "counter": {
+                "packets": 0,
+                "bytes": 0
+              }
+            },
+            {
+              "drop": null
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "container_removed": true,
+  "router_session_stopped": true,
+  "firewall_removed": true,
+  "artifact_owner_restored": true,
+  "native": {
+    "at": 1793382818.4506862,
+    "mode": "host_cache_reuse",
+    "sdk": "official_miot_camera_lite",
+    "application_reconnect_enabled": false,
+    "decoded_frames": 0,
+    "raw_video_frames": 0,
+    "browser_measurement": false,
+    "statuses": [
+      {
+        "status": 2,
+        "ms": 3
+      },
+      {
+        "status": 4,
+        "ms": 6021
+      },
+      {
+        "status": 1,
+        "ms": 8735
+      },
+      {
+        "status": 2,
+        "ms": 100637
+      },
+      {
+        "status": 1,
+        "ms": 103636
+      }
+    ],
+    "video_bytes": 0,
+    "oauth_client_matches_official_sdk": true,
+    "version": "v0.1.7",
+    "init_code": 0,
+    "new_camera_ok": true,
+    "register_status_code": 0,
+    "register_video_code": 0,
+    "start_code": 0,
+    "size": [
+      640,
+      480
+    ],
+    "success": false,
+    "first_phase": {
+      "decoded_frames": 15,
+      "raw_video_frames": 15,
+      "first_raw_ms": 8173,
+      "first_decoded_ms": 8182,
+      "size": [
+        640,
+        480
+      ],
+      "video_bytes": 19527
+    },
+    "first_stop_code": 0,
+    "idle_without_device_traffic_s": 90.0,
+    "resume_started_at": 1793382919.0888336,
+    "resume_cloud_network_blocked": true,
+    "resume_start_code": -2,
+    "resume_elapsed_ms": 3000,
+    "resume_success": false,
+    "stop_code": 0,
+    "elapsed_ms": 103837,
+    "log_flags": {
+      "busy": false,
+      "unauthorized": false,
+      "not support": false,
+      "wakeup": false,
+      "timeout": false,
+      "miss_get_vendor": false,
+      "relay": false
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "at": 1793388686.3651237,
+  "duration_s": 25,
+  "device_requests_sent": 0,
+  "application_payload_retained": false,
+  "data_packets": 0,
+  "tls_headers": 0,
+  "miio_headers": 0,
+  "samples": []
+}

@@ -1,0 +1,31 @@
+rest_command:
+  cateye_prepare:
+    url: "http://192.168.1.1:18766/api/prepare"
+    method: POST
+    content_type: application/json
+    timeout: 35
+    payload: "{{ {'session': session} | to_json }}"
+  cateye_heartbeat:
+    url: "http://192.168.1.1:18766/api/heartbeat"
+    method: POST
+    content_type: application/json
+    timeout: 5
+    payload: "{{ {'session': session, 'metrics': metrics | default({}), 'client': 'ha_native_mse'} | to_json }}"
+  cateye_stop:
+    url: "http://192.168.1.1:18766/api/stop"
+    method: POST
+    content_type: application/json
+    timeout: 5
+    payload: "{{ {'session': session, 'reason': reason | default('ha_stop')} | to_json }}"
+  cateye_events:
+    url: "http://192.168.1.1:18766/api/events"
+    method: POST
+    content_type: application/json
+    timeout: 5
+    payload: "{{ {'after': after, 'before': before} | to_json }}"
+  cateye_rekey:
+    url: "http://192.168.1.1:18766/api/rekey"
+    method: POST
+    content_type: application/json
+    timeout: 30
+    payload: "{{ {'session': session} | to_json }}"

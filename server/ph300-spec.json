@@ -1,0 +1,1853 @@
+{
+  "type": "urn:miot-spec-v2:device:video-doorbell:0000A03A:midr-ph300:2",
+  "description": "Video Doorbell",
+  "services": [
+    {
+      "iid": 1,
+      "type": "urn:miot-spec-v2:service:device-information:00007801:midr-ph300:1",
+      "description": "Device Information",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:manufacturer:00000001:midr-ph300:1",
+          "description": "Device Manufacturer",
+          "format": "string",
+          "access": [
+            "read"
+          ]
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:model:00000002:midr-ph300:1",
+          "description": "Device Model",
+          "format": "string",
+          "access": [
+            "read"
+          ]
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:serial-number:00000003:midr-ph300:1",
+          "description": "Device ID",
+          "format": "string",
+          "access": [
+            "read"
+          ],
+          "comment": "设备ID"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:firmware-revision:00000005:midr-ph300:1",
+          "description": "Current Firmware Version",
+          "format": "string",
+          "access": [
+            "read"
+          ]
+        },
+        {
+          "iid": 5,
+          "type": "urn:miot-spec-v2:property:serial-no:000000FF:midr-ph300:1",
+          "description": "Serial Number",
+          "format": "string",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "comment": "SN码"
+        }
+      ],
+      "comment": "设备信息"
+    },
+    {
+      "iid": 2,
+      "type": "urn:miot-spec-v2:service:video-doorbell:00007863:midr-ph300:1",
+      "description": "Video Doorbell",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:on:00000006:midr-ph300:1",
+          "description": "Switch Status",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "开关"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:status:00000007:midr-ph300:1",
+          "description": "Status",
+          "format": "string",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "工作状态"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:night-shot:00000057:midr-ph300:1",
+          "description": "Night Shot",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "夜视功能"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:time-watermark:00000087:midr-ph300:1",
+          "description": "Time Watermark",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "时间水印"
+        },
+        {
+          "iid": 6,
+          "type": "urn:miot-spec-v2:property:eco:00000024:midr-ph300:1",
+          "description": "ECO",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "ECO节能模式"
+        },
+        {
+          "iid": 7,
+          "type": "urn:miot-spec-v2:property:ringtone:0000009D:midr-ph300:1",
+          "description": "Ringtone",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "铃声类型"
+        },
+        {
+          "iid": 8,
+          "type": "urn:miot-spec-v2:property:image-distortion-correction:0000010F:midr-ph300:1",
+          "description": "Image Distortion Correction",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "图像畸变矫正"
+        },
+        {
+          "iid": 10,
+          "type": "urn:miot-spec-v2:property:current-time:00000098:midr-ph300:1",
+          "description": "Current Time",
+          "format": "uint32",
+          "access": [],
+          "value-range": [
+            0,
+            4294967295,
+            1
+          ],
+          "comment": "当前时间（unix timestamp）"
+        },
+        {
+          "iid": 11,
+          "type": "urn:miot-spec-v2:property:local-storage:0000011E:midr-ph300:1",
+          "description": "Local Storage",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "本地存储"
+        },
+        {
+          "iid": 12,
+          "type": "urn:miot-spec-v2:property:forcibly-removed-alarm-switch:000001EC:midr-ph300:1",
+          "description": "Forcibly Removed Alarm Switch",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "强拆警报开关"
+        },
+        {
+          "iid": 13,
+          "type": "urn:miot-spec-v2:property:auto-screen-on:000001ED:midr-ph300:1",
+          "description": "Auto Screen On",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "自动亮屏"
+        }
+      ],
+      "actions": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:action:remote-call:0000288D:midr-ph300:1",
+          "description": "Remote Call",
+          "in": [],
+          "out": [],
+          "comment": "远程呼叫"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:action:light-up-screen:0000288E:midr-ph300:1",
+          "description": "Light Up Screen",
+          "in": [],
+          "out": [],
+          "comment": "点亮屏幕"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:action:wake-up:0000283F:midr-ph300:1",
+          "description": "Wake Up",
+          "in": [],
+          "out": [],
+          "comment": "唤醒"
+        }
+      ],
+      "events": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:event:doorbell-ring:00005013:midr-ph300:1",
+          "description": "Doorbell Ring",
+          "arguments": [
+            10
+          ],
+          "comment": "有人按门铃"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:event:doorbell-forcibly-removed:00005025:midr-ph300:1",
+          "description": "Doorbell Forcibly Removed",
+          "arguments": [],
+          "comment": "猫眼被拆除"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:event:someone-passed-by:0000502C:midr-ph300:1",
+          "description": "Someone Passed By",
+          "arguments": [
+            10
+          ],
+          "comment": "有人经过"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:event:someone-at-the-door:0000502D:midr-ph300:1",
+          "description": "Someone At The Door",
+          "arguments": [
+            10
+          ],
+          "comment": "有人在门前停留"
+        }
+      ],
+      "comment": "可视门铃"
+    },
+    {
+      "iid": 3,
+      "type": "urn:miot-spec-v2:service:indicator-light:00007803:midr-ph300:1",
+      "description": "Indicator Light",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:on:00000006:midr-ph300:1",
+          "description": "Switch Status",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "开关"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:mode:00000008:midr-ph300:1",
+          "description": "Mode",
+          "format": "uint8",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "Auto"
+            }
+          ],
+          "comment": "模式"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:brightness:0000000D:midr-ph300:1",
+          "description": "Brightness",
+          "format": "uint8",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "unit": "percentage",
+          "value-range": [
+            1,
+            100,
+            1
+          ],
+          "comment": "亮度"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:color:0000000E:midr-ph300:1",
+          "description": "Color",
+          "format": "uint32",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "unit": "rgb",
+          "value-range": [
+            0,
+            16777215,
+            1
+          ],
+          "comment": "颜色"
+        },
+        {
+          "iid": 5,
+          "type": "urn:miot-spec-v2:property:color-temperature:0000000F:midr-ph300:1",
+          "description": "Color Temperature",
+          "format": "uint32",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "unit": "kelvin",
+          "value-range": [
+            1000,
+            10000,
+            1
+          ],
+          "comment": "色温"
+        },
+        {
+          "iid": 6,
+          "type": "urn:miot-spec-v2:property:flow:00000010:midr-ph300:1",
+          "description": "Flow",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "流光功能"
+        },
+        {
+          "iid": 7,
+          "type": "urn:miot-spec-v2:property:saturability:00000011:midr-ph300:1",
+          "description": "Saturability",
+          "format": "uint8",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "unit": "percentage",
+          "value-range": [
+            0,
+            100,
+            1
+          ],
+          "comment": "饱和度"
+        },
+        {
+          "iid": 8,
+          "type": "urn:miot-spec-v2:property:auto-lights-off:0000018B:midr-ph300:1",
+          "description": "Auto Lights Off",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "自动熄灯"
+        }
+      ],
+      "comment": "指示灯"
+    },
+    {
+      "iid": 4,
+      "type": "urn:miot-spec-v2:service:motion-detection:0000784F:midr-ph300:1",
+      "description": "Motion Detection",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:motion-detection:00000056:midr-ph300:1",
+          "description": "Motion Detection",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "移动侦测"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:alarm-interval:0000008F:midr-ph300:1",
+          "description": "Alarm Interval",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "unit": "minutes",
+          "gatt-access": [],
+          "comment": "侦测时间间隔"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:detection-sensitivity:00000090:midr-ph300:1",
+          "description": "Detection Sensitivity",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "侦测灵敏度"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:motion-detection-start-time:00000091:midr-ph300:1",
+          "description": "Motion Detection Start Time",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "移动人形侦测时间段"
+        },
+        {
+          "iid": 6,
+          "type": "urn:miot-spec-v2:property:record-delay:000001F3:midr-ph300:1",
+          "description": "Record Delay",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "延迟录像"
+        },
+        {
+          "iid": 7,
+          "type": "urn:miot-spec-v2:property:max-record-time:000001F4:midr-ph300:1",
+          "description": "Max Record Time",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "最大拍摄时长"
+        },
+        {
+          "iid": 8,
+          "type": "urn:miot-spec-v2:property:device-warn-time:000001F5:midr-ph300:1",
+          "description": "Device Warn Time",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "逗留警告"
+        }
+      ],
+      "comment": "移动侦测"
+    },
+    {
+      "iid": 5,
+      "type": "urn:miot-spec-v2:service:battery:00007805:midr-ph300:1",
+      "description": "Battery",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:battery-level:00000014:midr-ph300:1",
+          "description": "Battery Level",
+          "format": "uint32",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "unit": "percentage",
+          "value-range": [
+            0,
+            100,
+            1
+          ],
+          "gatt-access": [],
+          "comment": "电池电量"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:charging-state:00000015:midr-ph300:1",
+          "description": "Charging State",
+          "format": "string",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "电池充电状态"
+        }
+      ],
+      "events": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:event:low-battery:00005003:midr-ph300:1",
+          "description": "Low Battery",
+          "arguments": [
+            1
+          ],
+          "comment": "电量低"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:event:low-battery:00005003:midr-ph300:1",
+          "description": "Low Battery",
+          "arguments": [
+            1
+          ],
+          "comment": "电量耗尽"
+        }
+      ],
+      "comment": "电池"
+    },
+    {
+      "iid": 6,
+      "type": "urn:miot-spec-v2:service:speaker:0000781C:midr-ph300:1",
+      "description": "Speaker",
+      "properties": [
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:volume:00000013:midr-ph300:1",
+          "description": "Volume",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "unit": "percentage",
+          "gatt-access": [],
+          "comment": "音量"
+        }
+      ],
+      "comment": "扬声器"
+    },
+    {
+      "iid": 7,
+      "type": "urn:miot-spec-v2:service:memory-card-management:0000784E:midr-ph300:1",
+      "description": "Memory Card Management",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:status:00000007:midr-ph300:1",
+          "description": "Status",
+          "format": "string",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "工作状态"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:storage-total-space:0000008C:midr-ph300:1",
+          "description": "Storage Total Space",
+          "format": "string",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "存储总空间（KByte）"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:storage-free-space:0000008E:midr-ph300:1",
+          "description": "Storage Free Space",
+          "format": "string",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "存储剩余空间（KByte）"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:storage-used-space:0000008D:midr-ph300:1",
+          "description": "Storage Used Space",
+          "format": "string",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "存储已用空间（KByte）"
+        }
+      ],
+      "actions": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:action:format:00002831:midr-ph300:1",
+          "description": "Format",
+          "in": [],
+          "out": [],
+          "comment": "格式化"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:action:pop-up:00002832:midr-ph300:1",
+          "description": "Pop Up",
+          "in": [],
+          "out": [],
+          "comment": "弹出"
+        }
+      ],
+      "comment": "存储卡管理"
+    },
+    {
+      "iid": 8,
+      "type": "urn:miot-spec-v2:service:auto-reply:000078D2:midr-ph300:1",
+      "description": "Auto Reply",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:auto-reply:000001EE:midr-ph300:1",
+          "description": "Auto Reply",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "自动回复开关"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:auto-reply-week:000001EF:midr-ph300:1",
+          "description": "Auto Reply Week",
+          "format": "string",
+          "access": [
+            "read",
+            "notify",
+            "write"
+          ],
+          "comment": "自动回复日期"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:auto-reply-start-time:000001F0:midr-ph300:1",
+          "description": "Auto Reply Start Time",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "自动回复开始时间"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:auto-reply-end-time:000001F1:midr-ph300:1",
+          "description": "Auto Reply End Time",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "自动回复结束时间"
+        },
+        {
+          "iid": 5,
+          "type": "urn:miot-spec-v2:property:auto-reply-item:000001F2:midr-ph300:1",
+          "description": "Auto Reply Item",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "自动回复语音内容"
+        }
+      ],
+      "comment": "自动回复"
+    },
+    {
+      "iid": 10,
+      "type": "urn:miot-spec-v2:service:camera-control:0000782F:midr-ph300:1",
+      "description": "Camera Control",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:on:00000006:midr-ph300:1",
+          "description": "Switch Status",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "开关"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:image-rollover:00000058:midr-ph300:1",
+          "description": "Image Rollover",
+          "format": "uint16",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "unit": "arcdegrees",
+          "value-range": [
+            0,
+            90,
+            90
+          ],
+          "gatt-access": [],
+          "comment": "图像翻转"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:night-shot:00000057:midr-ph300:1",
+          "description": "Night Shot",
+          "format": "uint8",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "Off",
+              "comment": "null"
+            },
+            {
+              "value": 1,
+              "description": "On",
+              "comment": "null"
+            },
+            {
+              "value": 2,
+              "description": "Auto",
+              "comment": "null"
+            }
+          ],
+          "gatt-access": [],
+          "comment": "夜视功能"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:time-watermark:00000087:midr-ph300:1",
+          "description": "Time Watermark",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "时间水印"
+        },
+        {
+          "iid": 5,
+          "type": "urn:miot-spec-v2:property:wdr-mode:00000088:midr-ph300:1",
+          "description": "Wide Dynamic Range Mode",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "宽动态范围模式"
+        },
+        {
+          "iid": 6,
+          "type": "urn:miot-spec-v2:property:glimmer-full-color:00000089:midr-ph300:1",
+          "description": "Glimmer Full Color",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "微光全彩"
+        },
+        {
+          "iid": 7,
+          "type": "urn:miot-spec-v2:property:recording-mode:0000008B:midr-ph300:1",
+          "description": "Recording Mode",
+          "format": "uint8",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "No Record"
+            },
+            {
+              "value": 1,
+              "description": "Motion Record"
+            },
+            {
+              "value": 2,
+              "description": "All Record"
+            }
+          ],
+          "comment": "录制模式"
+        },
+        {
+          "iid": 8,
+          "type": "urn:miot-spec-v2:property:motion-tracking:0000008A:midr-ph300:1",
+          "description": "Motion Tracking",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "移动追踪"
+        },
+        {
+          "iid": 9,
+          "type": "urn:miot-spec-v2:property:local-storage:0000011E:midr-ph300:1",
+          "description": "Local Storage",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "本地存储"
+        },
+        {
+          "iid": 10,
+          "type": "urn:miot-spec-v2:property:ptz-camera:000001A7:midr-ph300:1",
+          "description": "Ptz Camera",
+          "format": "bool",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "comment": "云台控制"
+        },
+        {
+          "iid": 11,
+          "type": "urn:miot-spec-v2:property:human-tracking:000001A8:midr-ph300:1",
+          "description": "Human Tracking",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "人形追踪"
+        },
+        {
+          "iid": 12,
+          "type": "urn:miot-spec-v2:property:ai-frame:000001A9:midr-ph300:1",
+          "description": "Ai Frame",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "智能画框"
+        },
+        {
+          "iid": 13,
+          "type": "urn:miot-spec-v2:property:hdr-mode:00000282:midr-ph300:1",
+          "description": "High Dynamic Range Mode",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "高动态范围模式"
+        },
+        {
+          "iid": 14,
+          "type": "urn:miot-spec-v2:property:image-distortion-correction:0000010F:midr-ph300:1",
+          "description": "Image Distortion Correction",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "图像畸变矫正"
+        },
+        {
+          "iid": 15,
+          "type": "urn:miot-spec-v2:property:auto-sound-and-light-warning:000002B2:midr-ph300:1",
+          "description": "Auto Sound And Light Warning",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "自动声光报警开关"
+        },
+        {
+          "iid": 16,
+          "type": "urn:miot-spec-v2:property:manual-sound-and-light-warning:000002B3:midr-ph300:1",
+          "description": "Manual Sound And Light Warning",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "手动声光报警开关"
+        }
+      ],
+      "actions": [
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:action:restart-device:00002884:midr-ph300:1",
+          "description": "Restart Device",
+          "in": [],
+          "out": [],
+          "comment": "重启设备"
+        }
+      ],
+      "events": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:event:ir-turned-on:00005058:midr-ph300:1",
+          "description": "Ir Turned On",
+          "arguments": [],
+          "comment": "红外已打开"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:event:ir-turned-off:00005059:midr-ph300:1",
+          "description": "Ir Turned Off",
+          "arguments": [],
+          "comment": "红外已关闭"
+        }
+      ],
+      "comment": "摄像机控制（仅用到高动态）"
+    },
+    {
+      "iid": 12,
+      "type": "urn:miot-spec-v2:service:p2p-stream:00007881:midr-ph300:1",
+      "description": "PP Stream",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:talk-mode:000001A1:midr-ph300:1",
+          "description": "Talk Mode",
+          "format": "uint8",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "Two-way"
+            },
+            {
+              "value": 1,
+              "description": "One-way"
+            }
+          ],
+          "comment": "对讲方式"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:audio-codec:000001B3:midr-ph300:1",
+          "description": "Audio Codec",
+          "format": "uint8",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "G711A"
+            },
+            {
+              "value": 1,
+              "description": "ACC"
+            },
+            {
+              "value": 2,
+              "description": "OPUS"
+            },
+            {
+              "value": 3,
+              "description": "PCM"
+            }
+          ],
+          "comment": "音频编码"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:audio-bit-width:000001AB:midr-ph300:1",
+          "description": "Audio Bit Width",
+          "format": "uint8",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "8"
+            },
+            {
+              "value": 1,
+              "description": "16"
+            }
+          ],
+          "comment": "录制音频位宽"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:video-codec:000001AA:midr-ph300:1",
+          "description": "Video Codec",
+          "format": "uint8",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "H264"
+            },
+            {
+              "value": 1,
+              "description": "H265"
+            }
+          ],
+          "comment": "视频编码"
+        },
+        {
+          "iid": 5,
+          "type": "urn:miot-spec-v2:property:audio-smp-rate:000001B4:midr-ph300:1",
+          "description": "Audio Smp Rate",
+          "format": "uint8",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "8"
+            },
+            {
+              "value": 1,
+              "description": "16"
+            },
+            {
+              "value": 2,
+              "description": "32"
+            },
+            {
+              "value": 3,
+              "description": "48"
+            }
+          ],
+          "comment": "录制音频采样率"
+        },
+        {
+          "iid": 6,
+          "type": "urn:miot-spec-v2:property:audio-channel:000001B5:midr-ph300:1",
+          "description": "Audio Channel",
+          "format": "uint8",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "Single Channel"
+            },
+            {
+              "value": 1,
+              "description": "Dual Channel"
+            }
+          ],
+          "comment": "录制音频单双通道"
+        },
+        {
+          "iid": 7,
+          "type": "urn:miot-spec-v2:property:talk-codec:000001B6:midr-ph300:1",
+          "description": "Talk Codec",
+          "format": "uint8",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "G711A"
+            },
+            {
+              "value": 1,
+              "description": "ACC"
+            },
+            {
+              "value": 2,
+              "description": "OPUS"
+            },
+            {
+              "value": 3,
+              "description": "PCM"
+            }
+          ],
+          "comment": "对讲编码格式"
+        },
+        {
+          "iid": 8,
+          "type": "urn:miot-spec-v2:property:distortion-crt-osdx:000001B7:midr-ph300:1",
+          "description": "Distortion Crt Osd X",
+          "format": "float",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-range": [
+            0,
+            1,
+            0.0001
+          ],
+          "comment": "畸变纠正参数比例-宽"
+        },
+        {
+          "iid": 9,
+          "type": "urn:miot-spec-v2:property:distortion-crt-osdy:000001B8:midr-ph300:1",
+          "description": "Distortion Crt Osd Y",
+          "format": "float",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-range": [
+            0,
+            1,
+            0.0001
+          ],
+          "comment": "畸变纠正参数比例-高"
+        },
+        {
+          "iid": 10,
+          "type": "urn:miot-spec-v2:property:resolution-types:000001B9:midr-ph300:1",
+          "description": "Resolution Types",
+          "format": "uint8",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "360"
+            },
+            {
+              "value": 1,
+              "description": "480"
+            },
+            {
+              "value": 2,
+              "description": "720"
+            },
+            {
+              "value": 3,
+              "description": "1080"
+            },
+            {
+              "value": 4,
+              "description": "1296"
+            },
+            {
+              "value": 5,
+              "description": "1440"
+            }
+          ],
+          "comment": "视频分辨率"
+        }
+      ],
+      "actions": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:action:start-p2p-stream:00002839:midr-ph300:1",
+          "description": "Start P2P Stream",
+          "in": [],
+          "out": [],
+          "comment": "开始实时视频流"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:action:stop-stream:00002822:midr-ph300:1",
+          "description": "Stop Camera Stream",
+          "in": [],
+          "out": [],
+          "comment": "停止流"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:action:upload-video:00002885:midr-ph300:1",
+          "description": "Upload Video",
+          "in": [],
+          "out": [],
+          "comment": "录制视频并上传"
+        }
+      ],
+      "comment": "P2P视频流"
+    },
+    {
+      "iid": 13,
+      "type": "urn:miot-spec-v2:service:ai-detection:000078C8:midr-ph300:1",
+      "description": "Ai Detection",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:identity-id:0000019D:midr-ph300:1",
+          "description": "Identity Id",
+          "format": "string",
+          "access": [],
+          "comment": "身份ID"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:pets-type:0000019F:midr-ph300:1",
+          "description": "Pets Type",
+          "format": "uint8",
+          "access": [],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "Cat"
+            },
+            {
+              "value": 1,
+              "description": "Dog"
+            }
+          ],
+          "comment": "宠物种类"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:property:goods-type:000001A0:midr-ph300:1",
+          "description": "Goods Type",
+          "format": "uint8",
+          "access": [],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "Box"
+            },
+            {
+              "value": 1,
+              "description": "Express"
+            }
+          ],
+          "comment": "物品类型"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:property:face-detection-switch:000001AC:midr-ph300:1",
+          "description": "Face Detection Switch",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "人脸检测功能开关"
+        },
+        {
+          "iid": 7,
+          "type": "urn:miot-spec-v2:property:hand-gesture-name:000001AF:midr-ph300:1",
+          "description": "Hand Gesture Name",
+          "format": "uint8",
+          "access": [],
+          "value-list": [
+            {
+              "value": 0,
+              "description": "Yeah"
+            },
+            {
+              "value": 1,
+              "description": "Ok"
+            },
+            {
+              "value": 2,
+              "description": "Palm"
+            }
+          ],
+          "comment": "识别到手势名称"
+        },
+        {
+          "iid": 8,
+          "type": "urn:miot-spec-v2:property:human-detection:000001B0:midr-ph300:1",
+          "description": "Human Detection",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "人形检测开关"
+        },
+        {
+          "iid": 9,
+          "type": "urn:miot-spec-v2:property:move-detection:000001B1:midr-ph300:1",
+          "description": "Move Detection",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "画面变动检测"
+        },
+        {
+          "iid": 11,
+          "type": "urn:miot-spec-v2:property:current-time:00000098:midr-ph300:1",
+          "description": "Current Time",
+          "format": "uint32",
+          "access": [],
+          "value-range": [
+            0,
+            4294967295,
+            1
+          ],
+          "comment": "当前时间（unix timestamp）"
+        },
+        {
+          "iid": 12,
+          "type": "urn:miot-spec-v2:property:car-detection:00000293:midr-ph300:1",
+          "description": "Car Detection",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "车辆识别"
+        },
+        {
+          "iid": 13,
+          "type": "urn:miot-spec-v2:property:goods-detection:00000294:midr-ph300:1",
+          "description": "Goods Detection",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "物品识别"
+        },
+        {
+          "iid": 14,
+          "type": "urn:miot-spec-v2:property:detection-area:000002B4:midr-ph300:1",
+          "description": "Detection Area",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "识别区域"
+        },
+        {
+          "iid": 15,
+          "type": "urn:miot-spec-v2:property:detection-area-active:000002B5:midr-ph300:1",
+          "description": "Detection Area Active",
+          "format": "uint8",
+          "access": [
+            "write",
+            "notify"
+          ],
+          "value-range": [
+            0,
+            64,
+            1
+          ],
+          "comment": "识别区域激活"
+        },
+        {
+          "iid": 16,
+          "type": "urn:miot-spec-v2:property:detection-area-osd-switch:000002B6:midr-ph300:1",
+          "description": "Detection Area Osd Switch",
+          "format": "bool",
+          "access": [
+            "read",
+            "notify",
+            "write"
+          ],
+          "comment": "识别区域画框"
+        },
+        {
+          "iid": 17,
+          "type": "urn:miot-spec-v2:property:car-detected-mode:000002B7:midr-ph300:1",
+          "description": "Car Detected Mode",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "检测车辆模式"
+        },
+        {
+          "iid": 18,
+          "type": "urn:miot-spec-v2:property:person-approaching-car-mode:000002B8:midr-ph300:1",
+          "description": "Person Approaching Car Mode",
+          "format": "bool",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "检测有人靠近车辆模式"
+        },
+        {
+          "iid": 21,
+          "type": "urn:miot-spec-v2:property:people-number:00000380:midr-ph300:1",
+          "description": "People Number",
+          "format": "uint8",
+          "access": [],
+          "value-range": [
+            0,
+            20,
+            1
+          ],
+          "comment": "人数"
+        }
+      ],
+      "events": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:event:someone-left:0000504B:midr-ph300:1",
+          "description": "Someone Left",
+          "arguments": [
+            1,
+            11
+          ],
+          "comment": "有人离开了"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:event:someone-appeared:0000504A:midr-ph300:1",
+          "description": "Someone Appeared",
+          "arguments": [
+            1,
+            11
+          ],
+          "comment": "有人出现了"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:event:goods-appeared:00005046:midr-ph300:1",
+          "description": "Goods Appeared",
+          "arguments": [
+            3,
+            11
+          ],
+          "comment": "有物品出现"
+        },
+        {
+          "iid": 4,
+          "type": "urn:miot-spec-v2:event:goods-taken-away:00005047:midr-ph300:1",
+          "description": "Goods Taken Away",
+          "arguments": [
+            3,
+            11
+          ],
+          "comment": "物品离开画面"
+        },
+        {
+          "iid": 5,
+          "type": "urn:miot-spec-v2:event:pet-left:00005049:midr-ph300:1",
+          "description": "Pet Left",
+          "arguments": [
+            2,
+            11
+          ],
+          "comment": "宠物离开画面"
+        },
+        {
+          "iid": 6,
+          "type": "urn:miot-spec-v2:event:pet-appeared:00005048:midr-ph300:1",
+          "description": "Pet Appeared",
+          "arguments": [
+            2,
+            11
+          ],
+          "comment": "有宠物出现"
+        },
+        {
+          "iid": 7,
+          "type": "urn:miot-spec-v2:event:detected-babycry-event:0000504D:midr-ph300:1",
+          "description": "Detected Babycry Event",
+          "arguments": [],
+          "comment": "识别到宝宝哭声"
+        },
+        {
+          "iid": 8,
+          "type": "urn:miot-spec-v2:event:detected-hand-gesture-event:0000504E:midr-ph300:1",
+          "description": "Detected Hand Gesture Event",
+          "arguments": [
+            7
+          ],
+          "comment": "识别到手势"
+        },
+        {
+          "iid": 9,
+          "type": "urn:miot-spec-v2:event:someone-at-the-door:0000502D:midr-ph300:1",
+          "description": "Someone At The Door",
+          "arguments": [],
+          "comment": "有人停留"
+        },
+        {
+          "iid": 10,
+          "type": "urn:miot-spec-v2:event:object-motion:00005055:midr-ph300:1",
+          "description": "Object Motion",
+          "arguments": [],
+          "comment": "识别到画面变动"
+        },
+        {
+          "iid": 11,
+          "type": "urn:miot-spec-v2:event:louder-sound:0000506D:midr-ph300:1",
+          "description": "Louder Sound",
+          "arguments": [],
+          "comment": "较大声响"
+        },
+        {
+          "iid": 12,
+          "type": "urn:miot-spec-v2:event:car-detected:00005072:midr-ph300:1",
+          "description": "Car Detected",
+          "arguments": [],
+          "comment": "识别到车辆"
+        },
+        {
+          "iid": 13,
+          "type": "urn:miot-spec-v2:event:fall-detected:0000507F:midr-ph300:1",
+          "description": "Fall Detected",
+          "arguments": [],
+          "comment": "检测到跌倒"
+        },
+        {
+          "iid": 14,
+          "type": "urn:miot-spec-v2:event:cough-detected:00005093:midr-ph300:1",
+          "description": "Cough Detected",
+          "arguments": [],
+          "comment": "识别到咳嗽"
+        },
+        {
+          "iid": 15,
+          "type": "urn:miot-spec-v2:event:crossed-the-line:00005094:midr-ph300:1",
+          "description": "Crossed The Line",
+          "arguments": [],
+          "comment": "识别到越界"
+        },
+        {
+          "iid": 16,
+          "type": "urn:miot-spec-v2:event:detected-people-number:0000509C:midr-ph300:1",
+          "description": "Detected People Number",
+          "arguments": [
+            21
+          ],
+          "comment": "识别到人数"
+        }
+      ],
+      "comment": "AI检测（只用到人形和人脸）"
+    },
+    {
+      "iid": 14,
+      "type": "urn:miot-spec-v2:service:smart-care:000078CC:midr-ph300:1",
+      "description": "Smart Care",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:smart-care-switch:000001C2:midr-ph300:1",
+          "description": "Smart Care Switch",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "智能看护功能开关"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:smart-care-area:000001C3:midr-ph300:1",
+          "description": "Smart Care Area",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "comment": "看护区域"
+        }
+      ],
+      "events": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:event:key-area-human:0000504F:midr-ph300:1",
+          "description": "Key Area Human",
+          "arguments": [],
+          "comment": "重点区域有人出入"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:event:baby-woke-up:00005050:midr-ph300:1",
+          "description": "Baby Woke Up",
+          "arguments": [],
+          "comment": "宝宝睡醒"
+        },
+        {
+          "iid": 3,
+          "type": "urn:miot-spec-v2:event:long-time-no-human:00005051:midr-ph300:1",
+          "description": "Long Time No Human",
+          "arguments": [],
+          "comment": "长时间无人移动"
+        }
+      ],
+      "comment": "智能看护"
+    },
+    {
+      "iid": 15,
+      "type": "urn:miot-spec-v2:service:screen:00007806:midr-ph300:1",
+      "description": "Screen",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:display-state:00000131:midr-ph300:1",
+          "description": "Display State",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "屏幕显示模式"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:auto-screen-off-time:00000263:midr-ph300:1",
+          "description": "Auto Screen Off Time",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "自动息屏时间"
+        }
+      ],
+      "comment": "显示屏"
+    },
+    {
+      "iid": 16,
+      "type": "urn:miot-spec-v2:service:no-disturb:000078BC:midr-ph300:2",
+      "description": "No Disturb",
+      "properties": [
+        {
+          "iid": 1,
+          "type": "urn:miot-spec-v2:property:no-disturb:00000152:midr-ph300:2",
+          "description": "No Disturb",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "门铃勿扰开关('true' or 'false')"
+        },
+        {
+          "iid": 2,
+          "type": "urn:miot-spec-v2:property:enable-time-period:00000153:midr-ph300:2",
+          "description": "Enable Time Period",
+          "format": "string",
+          "access": [
+            "read",
+            "write",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "启用时间段(格式为：'00:00-00:00')"
+        }
+      ],
+      "comment": "勿扰"
+    },
+    {
+      "iid": 11,
+      "type": "urn:midr-spec:service:camera-control-maix:00007801:midr-ph300:1",
+      "description": "camera-control-maix",
+      "properties": [
+        {
+          "iid": 3,
+          "type": "urn:midr-spec:property:auto-reply-custom:00000003:midr-ph300:1",
+          "description": "auto-reply-custom",
+          "format": "string",
+          "access": [],
+          "gatt-access": [],
+          "comment": "自动回复生效时间指定时间段"
+        },
+        {
+          "iid": 4,
+          "type": "urn:midr-spec:property:motion-custom:00000004:midr-ph300:1",
+          "description": "motion-custom",
+          "format": "string",
+          "access": [],
+          "gatt-access": [],
+          "comment": "移动人形侦测生效时间自定义"
+        },
+        {
+          "iid": 5,
+          "type": "urn:midr-spec:property:sreen-connect-custom:00000001:midr-ph300:1",
+          "description": "sreen-connect-custom",
+          "format": "string",
+          "access": [
+            "read",
+            "notify"
+          ],
+          "gatt-access": [],
+          "comment": "屏幕的连接状态"
+        },
+        {
+          "iid": 6,
+          "type": "urn:midr-spec:property:sleep-status:00000002:midr-ph300:1",
+          "description": "",
+          "format": "string",
+          "access": [],
+          "comment": "休眠状态"
+        },
+        {
+          "iid": 7,
+          "type": "urn:midr-spec:property:auto-reply-cus-add:00000005:midr-ph300:1",
+          "description": "auto-reply-cus-add",
+          "format": "string",
+          "access": [],
+          "gatt-access": [],
+          "comment": "自动回复自定义语音列表"
+        },
+        {
+          "iid": 8,
+          "type": "urn:midr-spec:property:auto-reply-cus-reduc:00000006:midr-ph300:1",
+          "description": "",
+          "format": "string",
+          "access": [],
+          "comment": "自动回复自定义语音删除"
+        },
+        {
+          "iid": 9,
+          "type": "urn:midr-spec:property:max-screen-duration:00000007:midr-ph300:1",
+          "description": "",
+          "format": "string",
+          "access": [
+            "read",
+            "notify",
+            "write"
+          ],
+          "unit": "seconds",
+          "comment": "最大亮屏时长"
+        }
+      ],
+      "events": [
+        {
+          "iid": 1,
+          "type": "urn:midr-spec:event:temp-high:00005001:midr-ph300:1",
+          "description": "temp-high",
+          "arguments": [],
+          "comment": "温度过高"
+        },
+        {
+          "iid": 2,
+          "type": "urn:midr-spec:event:offline:00005002:midr-ph300:1",
+          "description": "offline",
+          "arguments": [],
+          "comment": "设备离线"
+        },
+        {
+          "iid": 3,
+          "type": "urn:midr-spec:event:pir-error-tirgger:00005003:midr-ph300:1",
+          "description": "pir-error-tirgger",
+          "arguments": [],
+          "comment": "PIR频繁误唤醒"
+        }
+      ],
+      "comment": "自定义摄像机控制服务"
+    }
+  ]
+}

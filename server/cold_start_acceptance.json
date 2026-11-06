@@ -1,0 +1,78 @@
+{
+  "at": 1793353239.5119107,
+  "baseline_first_frame_ms": 12892,
+  "optimized_browser": {
+    "at": 1793353237.3572931,
+    "transport": "mse",
+    "client": "ha_native_mse",
+    "video_path": "ha_same_origin",
+    "codec": "video/mp4; codecs=\"avc1.42001F\"",
+    "fps": 10,
+    "frames": 2279,
+    "buffer_ms": 726,
+    "first_frame_ms": 10641,
+    "prepare_ms": 1632,
+    "negotiated_ms": null,
+    "dropped_frames": 4,
+    "waits": 33,
+    "catchups": 2
+  },
+  "observed_cached_prepare": {
+    "at": 1793352870.7003138,
+    "local_wake_ms": 486,
+    "cloud_wake_ms": 1135,
+    "used_cached_session": true,
+    "total_ms": 1625
+  },
+  "software_only_preload": true,
+  "idle_camera_polling": false,
+  "cached_credential_has_expiry_fallback": true,
+  "go2rtc_source_patch": "go2rtc-first-frame.patch",
+  "rekey_acceptance": {
+    "attach_existing_status": 200,
+    "rekey_status": 200,
+    "timing": {
+      "at": 1793353176.123748,
+      "no_wake": true,
+      "key_requests": [
+        {
+          "ms": 429,
+          "ready": true
+        }
+      ],
+      "key_attempts": 1,
+      "key_ms": 429,
+      "elapsed_ms": 446,
+      "total_ms": 446
+    },
+    "second_rekey_status": 409,
+    "compat_mime": "video/mp4; codecs=\"avc1.42001F\"",
+    "compat_frames": 14,
+    "test_stop_status": 200
+  },
+  "idle_after_tests": {
+    "at": 1793353763.9625597,
+    "streams": {
+      "cateye_live": {
+        "active_producers": 0,
+        "consumers": 0
+      },
+      "cateye_local": {
+        "active_producers": 0,
+        "consumers": 0
+      }
+    },
+    "viewer": {
+      "active": false,
+      "at": 1793353712.1692228
+    }
+  },
+  "cancel_acceptance": {
+    "stop_status": 200,
+    "stop_ms": 9,
+    "prepare_result": "ServerDisconnectedError",
+    "late_rekey_status": 410,
+    "idle": true
+  },
+  "ongoing_flow_limit": "First-frame timing is a single browser sample. Long-view buffer waits occurred during debugging and credential/codec tests; no zero-stutter claim."
+}

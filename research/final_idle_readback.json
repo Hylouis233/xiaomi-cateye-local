@@ -1,0 +1,16 @@
+{
+  "at": 1793390308.1161296,
+  "streams": {
+    "cateye_live": {
+      "producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "producers": 0,
+      "consumers": 0
+    }
+  },
+  "viewer_active": false,
+  "wake_policy": "cloud_on_demand",
+  "remaining_test_workers": []
+}

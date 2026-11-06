@@ -1,0 +1,65 @@
+[
+  {
+    "at": 1793357054.433497,
+    "direction": "router_to_camera",
+    "kind": "0x30",
+    "udp_payload_length": 4,
+    "declared_length": 0
+  },
+  {
+    "at": 1793357055.434156,
+    "direction": "router_to_camera",
+    "kind": "0x30",
+    "udp_payload_length": 4,
+    "declared_length": 0
+  },
+  {
+    "at": 1793357056.434365,
+    "direction": "router_to_camera",
+    "kind": "0x30",
+    "udp_payload_length": 4,
+    "declared_length": 0
+  },
+  {
+    "at": 1793357057.434577,
+    "direction": "router_to_camera",
+    "kind": "0x30",
+    "udp_payload_length": 4,
+    "declared_length": 0
+  },
+  {
+    "at": 1793357058.435728,
+    "direction": "router_to_camera",
+    "kind": "0x30",
+    "udp_payload_length": 4,
+    "declared_length": 0
+  },
+  {
+    "at": 1793357058.439056,
+    "direction": "camera_to_router",
+    "kind": "0x41",
+    "udp_payload_length": 24,
+    "declared_length": 20
+  },
+  {
+    "at": 1793357058.439457,
+    "direction": "router_to_camera",
+    "kind": "0x41",
+    "udp_payload_length": 24,
+    "declared_length": 20
+  },
+  {
+    "at": 1793357058.48975,
+    "direction": "camera_to_router",
+    "kind": "0x43",
+    "udp_payload_length": 96,
+    "declared_length": 44
+  },
+  {
+    "at": 1793357058.495409,
+    "direction": "camera_to_router",
+    "kind": "0x43",
+    "udp_payload_length": 48,
+    "declared_length": 44
+  }
+]

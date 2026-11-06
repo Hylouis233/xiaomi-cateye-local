@@ -1,0 +1,37 @@
+{
+  "at": 1793380293.0003104,
+  "phase": "finished",
+  "cloud_called": false,
+  "cloud_wake_sent": false,
+  "cloud_key_refresh_sent": false,
+  "external_coordination": false,
+  "quiet_s_before_probe": 132.4,
+  "before": {
+    "cateye_live": {
+      "active_producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active_producers": 0,
+      "consumers": 0
+    }
+  },
+  "business_state": {
+    "error": "DeviceError",
+    "code": -30012,
+    "busy": true,
+    "elapsed_ms": 1103
+  },
+  "local_replies": [],
+  "handshake_elapsed_ms": 6021,
+  "after": {
+    "cateye_live": {
+      "active_producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active_producers": 0,
+      "consumers": 0
+    }
+  }
+}

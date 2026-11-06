@@ -1,0 +1,13 @@
+{
+  "remaining_native_test_containers": [],
+  "temporary_auth_files_removed": [
+    "host_test/auth.json",
+    "cache_test/auth.json",
+    "cold_test/auth.json",
+    "auth.json"
+  ],
+  "private_log_files_redacted": 0,
+  "ble_report_owner_restored": true,
+  "test_firewall_table_absent": true,
+  "production_credentials_changed": false
+}

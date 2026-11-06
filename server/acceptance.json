@@ -1,0 +1,63 @@
+{
+  "client": "aiortc_protocol_test",
+  "offer_answer_ms": 16116,
+  "first_decoded_frame_ms": 16196,
+  "size": [
+    640,
+    480
+  ],
+  "decoded_frames": 270,
+  "measured_fps": 13.9,
+  "frame_gap_median_ms": 80.8,
+  "frame_gap_max_ms": 232.2,
+  "explicit_stop_response_ms": 33,
+  "at": 1793339445.7645636,
+  "ha_embedded": true,
+  "default_collapsed": true,
+  "connect_only_live_tab": true,
+  "shared_storage": "native_frigate_same_volume",
+  "separate_quota_removed": true,
+  "native_retention": {
+    "continuous_days": 90,
+    "event_days": 30
+  },
+  "face_engine_smoke": {
+    "success": true,
+    "score": 0.99,
+    "same_existing_label": true
+  },
+  "doorway_real_face_accuracy": "not_yet_measured",
+  "physical_doorbell_pir": "not_yet_observed",
+  "codec_acceptance": {
+    "h264": {
+      "client": "aiortc_protocol_test",
+      "offer_answer_ms": 16116,
+      "first_decoded_frame_ms": 16196,
+      "size": [
+        640,
+        480
+      ],
+      "decoded_frames": 270,
+      "measured_fps": 13.9,
+      "frame_gap_median_ms": 80.8,
+      "frame_gap_max_ms": 232.2,
+      "explicit_stop_response_ms": 33
+    },
+    "hevc": {
+      "client": "aiortc_protocol_test",
+      "offer_answer_ms": 11206,
+      "first_decoded_frame_ms": 11338,
+      "size": [
+        640,
+        480
+      ],
+      "decoded_frames": 120,
+      "measured_fps": 12.46,
+      "frame_gap_median_ms": 82.3,
+      "frame_gap_max_ms": 248.6,
+      "explicit_stop_response_ms": 26
+    }
+  },
+  "adaptive_hevc_direct_verified": true,
+  "final_idle_verified": true
+}

@@ -1,0 +1,78 @@
+{
+  "at": 1793350786.6784186,
+  "resource_version": "20261030-12",
+  "events": [
+    {
+      "id": "ha_viewer-viewer-1793350207918",
+      "at": 1793350207.9178984,
+      "kind": "viewer",
+      "label": "实时查看",
+      "source": "ha_viewer"
+    },
+    {
+      "id": "mijia_event-4-1793349246803",
+      "at": 1793349246.8027196,
+      "kind": "4",
+      "label": "有人停留",
+      "source": "mijia_event"
+    }
+  ],
+  "browser_observed_received_event": {
+    "kind": "someone_at_the_door",
+    "at": 1793349246.8027196,
+    "clip_start": 1793349247,
+    "clip_end": 1793349257.866667
+  },
+  "checks": {
+    "device_events_via_ha_rest": true,
+    "actual_event_visible_inline": true,
+    "prefill_before_play_test": true,
+    "buffering_does_not_cancel_session_test": true,
+    "automatic_refresh_preserves_player_test": true
+  },
+  "media_transport": [
+    {
+      "mode": "hevc",
+      "prepare_status": 200,
+      "prepare_ms": 8361,
+      "mime": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+      "first_media_ms": 11322,
+      "bytes": 373456,
+      "decoded_frames": 333,
+      "frame_span_s": 22.067,
+      "max_frame_gap_s": 0.067,
+      "max_network_fragment_gap_s": 0.454,
+      "size": [
+        640,
+        480
+      ],
+      "stop_ms": 8
+    }
+  ],
+  "event_hls": {
+    "event": "received_mijia_someone_at_the_door",
+    "source_clip_seconds": 10.866667,
+    "hls_fragments": 1,
+    "bytes": 582261,
+    "download_ms_per_part": [
+      12,
+      21
+    ],
+    "decoded_frames": 163,
+    "frame_span_s": 10.8,
+    "max_frame_gap_s": 0.067,
+    "total_check_ms": 247,
+    "endlist": true
+  },
+  "idle": {
+    "cateye_live": {
+      "active_producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active_producers": 0,
+      "consumers": 0
+    }
+  },
+  "limits": "Current-user playback device not specified; independent browser automation unavailable and foreground Chrome actively used. Protocol decoding is not a claim of zero browser stutter."
+}

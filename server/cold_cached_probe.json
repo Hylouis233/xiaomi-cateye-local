@@ -1,0 +1,10 @@
+{
+  "at": 1793351620.4390469,
+  "credential_age_s": 128,
+  "wake": "authorized_cloud_fallback",
+  "wake_ms": 1717,
+  "first_media_ms": 9590,
+  "frames": 9,
+  "cache_valid": true,
+  "idle_status": 200
+}

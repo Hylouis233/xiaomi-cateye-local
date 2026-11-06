@@ -1,0 +1,31 @@
+{
+  "at": 1793383714.661803,
+  "cloud_wake_sent": false,
+  "stream_started": false,
+  "inventory_top_keys": [
+    "uid",
+    "homes",
+    "devices"
+  ],
+  "eligible_hub_candidates": [
+    {
+      "model": "lumi.gateway.acn004",
+      "online": true,
+      "connect_type": 0
+    },
+    {
+      "model": "xiaomi.wifispeaker.x08a",
+      "online": false,
+      "connect_type": 0
+    }
+  ],
+  "camera_records": [
+    {
+      "model": "midr.cateye.ph300",
+      "online": true,
+      "connect_type": 0,
+      "pid": 0
+    }
+  ],
+  "inventory_ms": 507
+}

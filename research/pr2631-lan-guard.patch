@@ -1,0 +1,44 @@
+diff --git a/pkg/xiaomi/miss/cs2/server.go b/pkg/xiaomi/miss/cs2/server.go
+index 4feeb22..04ba52c 100644
+--- a/pkg/xiaomi/miss/cs2/server.go
++++ b/pkg/xiaomi/miss/cs2/server.go
+@@ -5,6 +5,7 @@ import (
+ 	"encoding/hex"
+ 	"fmt"
+ 	"net"
++	"os"
+ 	"strconv"
+ 	"strings"
+ 	"time"
+@@ -104,7 +105,11 @@ func serverHandshake(p2pID string, servers []string, transport string) (net.Conn
+ 	}
+ 
+ 	var peers []*net.UDPAddr
++	allowedLAN := os.Getenv("CATEYE_LAN_ONLY_IP")
+ 	addPeer := func(addr *net.UDPAddr) {
++		if allowedLAN != "" && addr.IP.String() != allowedLAN {
++			return
++		}
+ 		for _, p := range peers {
+ 			if p.IP.Equal(addr.IP) && p.Port == addr.Port {
+ 				return
+@@ -170,6 +175,9 @@ func serverHandshake(p2pID string, servers []string, transport string) (net.Conn
+ 			continue
+ 		}
+ 
++		if allowedLAN != "" && addr.IP.String() != allowedLAN {
++			continue
++		}
+ 		switch buf[1] {
+ 		case msgPunchPkt:
+ 			addPeer(addr)
+@@ -246,6 +254,9 @@ func marshalP2PReq(did []byte, ip net.IP, port uint16) []byte {
+ }
+ 
+ func outboundIP(dest string) net.IP {
++	if explicit := net.ParseIP(os.Getenv("CATEYE_CLIENT_LAN_IP")); explicit != nil {
++		return explicit
++	}
+ 	conn, err := net.Dial("udp4", net.JoinHostPort(dest, "1"))
+ 	if err != nil {
+ 		return nil

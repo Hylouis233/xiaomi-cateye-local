@@ -1,0 +1,20 @@
+{
+  "at": 1793379640.3523867,
+  "duration_s": 45,
+  "camera_packets": 1,
+  "cloud_wake_sent": false,
+  "probe_sent": false,
+  "rows": [
+    {
+      "src": "192.168.1.210",
+      "dst": "111.13.40.5",
+      "sport": 57760,
+      "dport": 443,
+      "proto": "tcp",
+      "cs2_kind": null,
+      "count": 1,
+      "first_at": 1793379662.219249,
+      "last_at": 1793379662.219249
+    }
+  ]
+}

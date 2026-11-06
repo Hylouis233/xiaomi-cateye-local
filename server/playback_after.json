@@ -1,0 +1,15 @@
+{
+  "segments": 7,
+  "segment_duration_samples": [
+    "4.833",
+    "9.812",
+    "9.810",
+    "9.827",
+    "9.812",
+    "9.809",
+    "9.000"
+  ],
+  "first_segment_bytes": 111663,
+  "first_segment_ttfb_ms": 344,
+  "first_segment_total_ms": 344
+}

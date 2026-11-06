@@ -1,0 +1,16 @@
+{
+  "stop_status": 200,
+  "stop_response_ms": 9,
+  "connect_result": "cancelled_connection_closed",
+  "late_connect_status": 410,
+  "idle_connections": {
+    "cateye_live": [
+      0,
+      0
+    ],
+    "cateye_local": [
+      0,
+      0
+    ]
+  }
+}

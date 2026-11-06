@@ -1,0 +1,76 @@
+{
+  "at": 1793389358.6099641,
+  "phase": "finished",
+  "cloud_wake_calls": 1,
+  "video_requested": false,
+  "packets": [
+    {
+      "at": 1793389359.349881,
+      "from_camera": false,
+      "peer_ip": "111.13.40.5",
+      "sport": 443,
+      "dport": 57760,
+      "flags": "0x18",
+      "payload_length": 138,
+      "ip_total_length": 178,
+      "tcp_header_length": 20,
+      "capture_length": 192,
+      "window": 65100,
+      "urgent_pointer": 0
+    },
+    {
+      "at": 1793389367.334128,
+      "from_camera": true,
+      "peer_ip": "111.13.142.158",
+      "sport": 45856,
+      "dport": 443,
+      "flags": "0x2",
+      "payload_length": 0,
+      "ip_total_length": 60,
+      "tcp_header_length": 40,
+      "capture_length": 74,
+      "window": 29200,
+      "urgent_pointer": 0
+    },
+    {
+      "at": 1793389367.371905,
+      "from_camera": false,
+      "peer_ip": "111.13.142.158",
+      "sport": 443,
+      "dport": 45856,
+      "flags": "0x12",
+      "payload_length": 0,
+      "ip_total_length": 60,
+      "tcp_header_length": 40,
+      "capture_length": 74,
+      "window": 29200,
+      "urgent_pointer": 0
+    },
+    {
+      "at": 1793389367.375066,
+      "from_camera": true,
+      "peer_ip": "111.13.142.158",
+      "sport": 45856,
+      "dport": 443,
+      "flags": "0x10",
+      "payload_length": 0,
+      "ip_total_length": 40,
+      "tcp_header_length": 20,
+      "capture_length": 54,
+      "window": 29200,
+      "urgent_pointer": 0
+    }
+  ],
+  "private_candidate_count": 1,
+  "control_payloads": [
+    {
+      "at": 1793389359.349881,
+      "kind": "TLS_record",
+      "bytes": 138,
+      "complete": true
+    }
+  ],
+  "wake_started_at": 1793389359.1482937,
+  "wake_accepted": true,
+  "wake_ms": 896
+}

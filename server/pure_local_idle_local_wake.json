@@ -1,0 +1,39 @@
+{
+  "at": 1793378384.7005532,
+  "mode": "idle_local_wake",
+  "cloud_wake_sent": false,
+  "cloud_key_request_sent": false,
+  "cached_credentials": true,
+  "video_path": "direct_lan_cs2",
+  "browser_measurement": false,
+  "before": {
+    "cateye_live": {
+      "active_producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active_producers": 0,
+      "consumers": 0
+    }
+  },
+  "local_wake_error": "DeviceException",
+  "local_wake_ms": 1075,
+  "before_media_ms": 1078,
+  "media_error": true,
+  "error": "RuntimeError",
+  "test_elapsed_ms": 6084,
+  "delete_status": 200,
+  "idle_status": 200,
+  "stop_ms": 27,
+  "after": {
+    "cateye_live": {
+      "active_producers": 0,
+      "consumers": 0
+    },
+    "cateye_local": {
+      "active_producers": 0,
+      "consumers": 0
+    }
+  },
+  "source_phases": []
+}

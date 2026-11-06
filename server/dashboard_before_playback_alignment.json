@@ -1,0 +1,384 @@
+{
+  "title": "安防 NVR",
+  "views": [
+    {
+      "title": "总览",
+      "path": "overview",
+      "icon": "mdi:shield-home-outline",
+      "cards": [
+        {
+          "type": "vertical-stack",
+          "cards": [
+            {
+              "type": "custom:nvr-low-latency-card",
+              "streams": [
+                {
+                  "title": "流畅",
+                  "stream": "ezviz_bb8083087_live_fast"
+                },
+                {
+                  "title": "高清",
+                  "stream": "ezviz_bb8083087_live_main"
+                }
+              ]
+            },
+            {
+              "type": "custom:cateye-expand-card",
+              "face_entity": "sensor.mao_yan_zui_jin_shi_bie_ren_lian",
+              "media_card": {
+                "type": "custom:advanced-camera-card",
+                "cameras": [
+                  {
+                    "camera_entity": "camera.cateye",
+                    "id": "cateye",
+                    "title": "猫眼录像",
+                    "frigate": {
+                      "camera_name": "cateye"
+                    }
+                  }
+                ],
+                "view": {
+                  "default": "recordings"
+                },
+                "live": {
+                  "preload": false,
+                  "lazy_load": true,
+                  "lazy_unload": [
+                    "hidden",
+                    "unselected"
+                  ]
+                },
+                "menu": {
+                  "style": "outside",
+                  "buttons": {
+                    "live": {
+                      "enabled": false
+                    },
+                    "microphone": {
+                      "enabled": false
+                    },
+                    "camera_ui": {
+                      "enabled": false
+                    }
+                  }
+                },
+                "performance": {
+                  "features": {
+                    "media_chunk_size": 12,
+                    "max_simultaneous_engine_requests": 4
+                  }
+                },
+                "media_viewer": {
+                  "lazy_load": true,
+                  "transition_effect": "none"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "title": "安防状态",
+          "columns": 2,
+          "square": false,
+          "cards": [
+            {
+              "type": "tile",
+              "entity": "binary_sensor.ying_shi_she_bei_bb8083087_zai_xian",
+              "name": "摄像头在线",
+              "icon": "mdi:cctv"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_recording_status_zh",
+              "name": "录像状态",
+              "icon": "mdi:record-rec"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_motion_status_zh",
+              "name": "移动侦测",
+              "icon": "mdi:motion-sensor"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_person_status_zh",
+              "name": "人员侦测",
+              "icon": "mdi:account-alert"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_all_object_status_zh",
+              "name": "目标检测",
+              "icon": "mdi:crosshairs-gps"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_person_count_zh",
+              "name": "人员数量",
+              "icon": "mdi:account-group-outline"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.nvr_shi_bie_yu_yin_si_jia_ting_cheng_yuan_shu",
+              "name": "家庭成员",
+              "icon": "mdi:account-check"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.nvr_shi_bie_yu_yin_si_mo_sheng_ren_shu",
+              "name": "已确认陌生人",
+              "icon": "mdi:account-alert"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.nvr_shi_bie_yu_yin_si_shen_fen_wei_que_ren_shu",
+              "name": "身份未确认",
+              "icon": "mdi:account-question"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.nvr_shi_bie_yu_yin_si_yin_si_zhe_dang_zhuang_tai",
+              "name": "隐私保护",
+              "icon": "mdi:shield-eye"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "title": "录像存储",
+          "columns": 2,
+          "square": false,
+          "cards": [
+            {
+              "type": "tile",
+              "entity": "sensor.frigate_recording_earliest",
+              "name": "最早录像",
+              "icon": "mdi:calendar-clock"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.frigate_recording_latest",
+              "name": "最新录像",
+              "icon": "mdi:calendar-end"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.frigate_recording_duration_hours",
+              "name": "录像时长",
+              "icon": "mdi:clock-outline"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.frigate_recording_size_gib",
+              "name": "录像大小",
+              "icon": "mdi:harddisk"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.frigate_recording_continuity",
+              "name": "最近断开",
+              "icon": "mdi:timeline-alert-outline"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "title": "录像与截图",
+          "columns": 2,
+          "square": false,
+          "cards": [
+            {
+              "type": "tile",
+              "entity": "switch.ezviz_bb8083087_recordings",
+              "name": "录像"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_recording_status_zh",
+              "name": "录像状态"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.ezviz_bb8083087_snapshots",
+              "name": "截图"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_snapshot_status_zh",
+              "name": "截图状态"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "title": "检测与审核开关",
+          "columns": 2,
+          "square": false,
+          "cards": [
+            {
+              "type": "tile",
+              "entity": "switch.ezviz_bb8083087_detect",
+              "name": "目标检测"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.ezviz_bb8083087_motion",
+              "name": "移动检测"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.ezviz_bb8083087_review_alerts",
+              "name": "告警审核"
+            },
+            {
+              "type": "tile",
+              "entity": "switch.ezviz_bb8083087_review_detections",
+              "name": "检测审核"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "title": "检测结果",
+          "columns": 3,
+          "square": false,
+          "cards": [
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_motion_status_zh",
+              "name": "移动状态"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_person_status_zh",
+              "name": "人员状态"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_all_object_status_zh",
+              "name": "目标状态"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_person_count_zh",
+              "name": "人员数量"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.ezviz_bb8083087_all_count_zh",
+              "name": "目标数"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "title": "外网与服务状态",
+          "columns": 2,
+          "square": false,
+          "cards": [
+            {
+              "type": "tile",
+              "entity": "switch.ru_hu_men_she_xiang_tou_wai_wang_fang_wen",
+              "name": "外网访问",
+              "icon": "mdi:web"
+            },
+            {
+              "type": "button",
+              "entity": "script.ezviz_bb8083087_wan_temp_allow_10m",
+              "name": "临时外网 10 分钟",
+              "icon": "mdi:timer-lock-open-outline",
+              "show_state": false,
+              "tap_action": {
+                "action": "call-service",
+                "service": "script.turn_on",
+                "target": {
+                  "entity_id": "script.ezviz_bb8083087_wan_temp_allow_10m"
+                }
+              },
+              "icon_height": "24px"
+            },
+            {
+              "type": "tile",
+              "entity": "sensor.frigate_poc_camera_fps",
+              "name": "帧率",
+              "icon": "mdi:speedometer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "连续",
+      "path": "continuous",
+      "icon": "mdi:timeline-clock-outline",
+      "cards": [
+        {
+          "type": "button",
+          "name": "打开连续录像",
+          "icon": "mdi:timeline-clock-outline",
+          "show_state": false,
+          "icon_height": "32px",
+          "tap_action": {
+            "action": "navigate",
+            "navigation_path": "/media-browser/browser/media-source%3A%2F%2Ffrigate%2Ffrigate%2Frecordings"
+          }
+        }
+      ]
+    },
+    {
+      "title": "事件",
+      "path": "events",
+      "icon": "mdi:motion-sensor",
+      "cards": [
+        {
+          "type": "button",
+          "name": "打开事件录像",
+          "icon": "mdi:motion-sensor",
+          "show_state": false,
+          "icon_height": "32px",
+          "tap_action": {
+            "action": "navigate",
+            "navigation_path": "/media-browser/browser/media-source%3A%2F%2Ffrigate%2Ffrigate%2Fevent-search%2Fclips"
+          }
+        }
+      ]
+    },
+    {
+      "title": "媒体库",
+      "path": "media",
+      "icon": "mdi:play-box-multiple-outline",
+      "cards": [
+        {
+          "type": "button",
+          "name": "打开媒体库",
+          "icon": "mdi:play-box-multiple-outline",
+          "show_state": false,
+          "icon_height": "32px",
+          "tap_action": {
+            "action": "navigate",
+            "navigation_path": "/media-browser"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Frigate",
+      "path": "frigate",
+      "icon": "mdi:cctv",
+      "cards": [
+        {
+          "type": "button",
+          "name": "打开 Frigate",
+          "icon": "mdi:cctv",
+          "show_state": false,
+          "icon_height": "32px",
+          "tap_action": {
+            "action": "url",
+            "url_path": "http://192.168.1.1:8971/review"
+          }
+        }
+      ]
+    }
+  ]
+}

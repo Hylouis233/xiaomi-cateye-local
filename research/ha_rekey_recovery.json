@@ -1,0 +1,41 @@
+{
+  "at": 1793385286.5032597,
+  "path": "existing_HA_prepare_media_rekey_stop",
+  "browser_measurement": false,
+  "rekey_calls": 1,
+  "stages": [
+    {
+      "attempt": 1,
+      "started_ms": 486,
+      "error_flags": {
+        "auth": false,
+        "timeout": true,
+        "no answer from camera": false
+      },
+      "failed_ms": 5491
+    },
+    {
+      "attempt": 2,
+      "started_ms": 6777,
+      "decoded_frames": 15,
+      "first_decoded_ms": 9423,
+      "size": [
+        640,
+        480
+      ]
+    }
+  ],
+  "prepare_status": 200,
+  "prepare": {
+    "ready": true,
+    "prepare_ms": 484,
+    "used_cached_session": true
+  },
+  "rekey_status": 200,
+  "rekey_ms": 1286,
+  "success": true,
+  "stop_status": 200,
+  "stop_ms": 7,
+  "elapsed_ms": 10309,
+  "viewer_active_after_stop": false
+}

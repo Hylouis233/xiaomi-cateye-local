@@ -1,0 +1,40 @@
+{
+  "at": 1793354822.165985,
+  "prepare_status": 200,
+  "prepare": {
+    "ready": true,
+    "prepare_ms": 745,
+    "used_cached_session": true
+  },
+  "prepare_ms": 748,
+  "mime": "video/mp4; codecs=\"hvc1.1.6.L153.B0\"",
+  "first_media_ms": 7964,
+  "decoded_frames": 13,
+  "stop_status": 200,
+  "stop_ms": 8,
+  "wake": {
+    "at": 1793354822.1703327,
+    "no_wake": false,
+    "wake_policy": "cloud_on_demand",
+    "cloud_wake_ms": 732,
+    "elapsed_ms": 738,
+    "used_cached_session": true,
+    "total_ms": 738
+  },
+  "media": {
+    "at": 1793354830.1294436,
+    "prepare_ms": 745,
+    "media_bridge_ms": 746,
+    "upstream_ws_ms": 747,
+    "media_mime_ms": 7961,
+    "first_fragment_ms": 7961
+  },
+  "source_phases": [
+    "CATEYE_PHASE at_ms=1793354826949 phase=transport ms=4032",
+    "CATEYE_PHASE at_ms=1793354829361 phase=login ms=2412 protocol=cs2+tcp",
+    "CATEYE_PHASE at_ms=1793354829361 phase=start_media ms=0",
+    "CATEYE_PHASE at_ms=1793354829591 phase=first_packet ms=230",
+    "CATEYE_PHASE at_ms=1793354830128 phase=video_header ms=767",
+    "CATEYE_PHASE at_ms=1793354830128 phase=source_ready ms=7212"
+  ]
+}

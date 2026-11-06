@@ -1,0 +1,510 @@
+diff --git a/pkg/xiaomi/miss/client.go b/pkg/xiaomi/miss/client.go
+index 3113632..39c91cc 100644
+--- a/pkg/xiaomi/miss/client.go
++++ b/pkg/xiaomi/miss/client.go
+@@ -37,6 +37,7 @@ type Conn interface {
+ }
+ 
+ func NewClient(rawURL string) (*Client, error) {
++	started := time.Now()
+ 	u, err := url.Parse(rawURL)
+ 	if err != nil {
+ 		return nil, err
+@@ -66,11 +67,14 @@ func NewClient(rawURL string) (*Client, error) {
+ 		return nil, err
+ 	}
+ 
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=transport ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++	loginStarted := time.Now()
+ 	err = login(conn, query.Get("client_public"), query.Get("sign"))
+ 	if err != nil {
+ 		_ = conn.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=login ms=%d protocol=%s\n", time.Now().UnixMilli(), time.Since(loginStarted).Milliseconds(), conn.Protocol())
+ 
+ 	return &Client{Conn: conn, key: key, model: model}, nil
+ }
+@@ -106,14 +110,18 @@ const (
+ 
+ func login(conn Conn, clientPublic, sign string) error {
+ 	s := fmt.Sprintf(`{"public_key":"%s","sign":"%s","uuid":"","support_encrypt":0}`, clientPublic, sign)
++	started := time.Now()
+ 	if err := conn.WriteCommand(cmdAuthReq, []byte(s)); err != nil {
+ 		return err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=auth_send_ack ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++	started = time.Now()
+ 
+ 	_, data, err := conn.ReadCommand()
+ 	if err != nil {
+ 		return err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=auth_reply ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
+ 
+ 	if !bytes.Contains(data, []byte(`"result":"success"`)) {
+ 		return fmt.Errorf("miss: auth: %s", data)
+diff --git a/pkg/xiaomi/miss/cs2/conn.go b/pkg/xiaomi/miss/cs2/conn.go
+index 2c1b395..0173a76 100644
+--- a/pkg/xiaomi/miss/cs2/conn.go
++++ b/pkg/xiaomi/miss/cs2/conn.go
+@@ -8,7 +8,6 @@ import (
+ 	"io"
+ 	"net"
+ 	"sync"
+-	"sync/atomic"
+ 	"time"
+ )
+ 
+@@ -41,8 +40,10 @@ type Conn struct {
+ 
+ 	channels [4]*dataChannel
+ 
+-	cmdMu  sync.Mutex
+-	cmdAck func()
++	cmdMu       sync.Mutex
++	cmdAck      func()
++	ackMu       sync.Mutex
++	pendingAuth bool
+ }
+ 
+ const (
+@@ -62,6 +63,7 @@ const (
+ )
+ 
+ func handshake(host, transport string) (net.Conn, error) {
++	started := time.Now()
+ 	conn, err := newUDPConn(host, 32108)
+ 	if err != nil {
+ 		return nil, err
+@@ -77,6 +79,11 @@ func handshake(host, transport string) (net.Conn, error) {
+ 		_ = conn.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=lan_search ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++	readyStarted := time.Now()
++	// A sleeping device can consume most of the discovery deadline before it
++	// first responds. Give readiness negotiation its own bounded deadline.
++	_ = conn.SetDeadline(time.Now().Add(3 * time.Second))
+ 
+ 	var msgUDP, msgTCP byte
+ 
+@@ -91,16 +98,21 @@ func handshake(host, transport string) (net.Conn, error) {
+ 		return res[1] == msgUDP || res[1] == msgTCP
+ 	})
+ 	if err != nil {
++		fmt.Printf("CATEYE_PHASE at_ms=%d phase=lan_ready_error ms=%d\n", time.Now().UnixMilli(), time.Since(readyStarted).Milliseconds())
+ 		_ = conn.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=lan_ready ms=%d\n", time.Now().UnixMilli(), time.Since(readyStarted).Milliseconds())
+ 
+ 	_ = conn.SetDeadline(time.Time{})
+ 
+ 	if res[1] == msgTCP {
+ 		_ = conn.Close()
+ 		//host := fmt.Sprintf("%d.%d.%d.%d:%d", b[31], b[30], b[29], b[28], uint16(b[27])<<8|uint16(b[26]))
+-		return newTCPConn(conn.RemoteAddr().String())
++		tcpStarted := time.Now()
++		tcp, err := newTCPConn(conn.RemoteAddr().String())
++		fmt.Printf("CATEYE_PHASE at_ms=%d phase=tcp_connect ms=%d\n", time.Now().UnixMilli(), time.Since(tcpStarted).Milliseconds())
++		return tcp, err
+ 	}
+ 
+ 	return conn, nil
+@@ -132,6 +144,10 @@ func (c *Conn) worker() {
+ 		case msgDrw:
+ 			ch := buf[5]
+ 			channel := c.channels[ch]
++			if ch == 0 && n >= 16 && binary.LittleEndian.Uint32(buf[12:16]) == 0x101 {
++				// An authentication response also proves the request arrived.
++				c.signalCmdAck(true)
++			}
+ 
+ 			if c.isTCP {
+ 				// For TCP we should send ping every second to keep connection alive.
+@@ -165,9 +181,7 @@ func (c *Conn) worker() {
+ 			_, _ = c.Conn.Write([]byte{magic, msgPong, 0, 0})
+ 		case msgPong, msgP2PRdyUDP, msgP2PRdyTCP, msgClose, msgCloseAck: // skip it
+ 		case msgDrwAck: // only for UDP
+-			if c.cmdAck != nil {
+-				c.cmdAck()
+-			}
++			c.signalCmdAck(false)
+ 		default:
+ 			fmt.Printf("%s: unknown msg: %x\n", "cs2", buf[:n])
+ 		}
+@@ -214,29 +228,41 @@ func (c *Conn) WriteCommand(cmd uint32, data []byte) error {
+ 		return err
+ 	}
+ 
+-	var repeat atomic.Int32
+-	repeat.Store(5)
+-
+-	timeout := time.NewTicker(time.Second)
+-	defer timeout.Stop()
+-
++	ack := make(chan struct{}, 1)
++	c.ackMu.Lock()
++	c.pendingAuth = cmd == 0x100
+ 	c.cmdAck = func() {
+-		repeat.Store(0)
+-		timeout.Reset(1)
++		select {
++		case ack <- struct{}{}:
++		default:
++		}
+ 	}
+-
+-	for {
++	c.ackMu.Unlock()
++	defer func() { c.ackMu.Lock(); c.cmdAck = nil; c.pendingAuth = false; c.ackMu.Unlock() }()
++	for attempt := 0; attempt < 5; attempt++ {
+ 		if _, err := c.Conn.Write(req); err != nil {
+ 			return err
+ 		}
+-		<-timeout.C
+-		r := repeat.Add(-1)
+-		if r < 0 {
++		timer := time.NewTimer(time.Second)
++		select {
++		case <-ack:
++			timer.Stop()
+ 			return nil
++		case <-timer.C:
+ 		}
+-		if r == 0 {
+-			return fmt.Errorf("%s: can't send command %d", "cs2", cmd)
+-		}
++	}
++	return fmt.Errorf("%s: can't send command %d", "cs2", cmd)
++}
++
++func (c *Conn) signalCmdAck(authResponse bool) {
++	c.ackMu.Lock()
++	callback := c.cmdAck
++	if authResponse && !c.pendingAuth {
++		callback = nil
++	}
++	c.ackMu.Unlock()
++	if callback != nil {
++		callback()
+ 	}
+ }
+ 
+diff --git a/pkg/xiaomi/miss/producer.go b/pkg/xiaomi/miss/producer.go
+index dcea284..a5bbdc7 100644
+--- a/pkg/xiaomi/miss/producer.go
++++ b/pkg/xiaomi/miss/producer.go
+@@ -1,6 +1,7 @@
+ package miss
+ 
+ import (
++	"encoding/binary"
+ 	"fmt"
+ 	"net/url"
+ 	"time"
+@@ -14,10 +15,12 @@ import (
+ 
+ type Producer struct {
+ 	core.Connection
+-	client *Client
++	client  *Client
++	initial []*Packet
+ }
+ 
+ func Dial(rawURL string) (core.Producer, error) {
++	started := time.Now()
+ 	client, err := NewClient(rawURL)
+ 	if err != nil {
+ 		return nil, err
+@@ -26,17 +29,20 @@ func Dial(rawURL string) (core.Producer, error) {
+ 	u, _ := url.Parse(rawURL)
+ 	query := u.Query()
+ 
++	mediaStarted := time.Now()
+ 	err = client.StartMedia(query.Get("channel"), query.Get("subtype"), query.Get("audio"))
+ 	if err != nil {
+ 		_ = client.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=start_media ms=%d\n", time.Now().UnixMilli(), time.Since(mediaStarted).Milliseconds())
+ 
+-	medias, err := probe(client, query.Get("audio") != "0")
++	medias, initial, err := probe(client, query.Get("audio") != "0")
+ 	if err != nil {
+ 		_ = client.Close()
+ 		return nil, err
+ 	}
++	fmt.Printf("CATEYE_PHASE at_ms=%d phase=source_ready ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
+ 
+ 	return &Producer{
+ 		Connection: core.Connection{
+@@ -48,14 +54,20 @@ func Dial(rawURL string) (core.Producer, error) {
+ 			Medias:     medias,
+ 			Transport:  client,
+ 		},
+-		client: client,
++		client:  client,
++		initial: initial,
+ 	}, nil
+ }
+ 
+-func probe(client *Client, audio bool) ([]*core.Media, error) {
++func probe(client *Client, audio bool) ([]*core.Media, []*Packet, error) {
++	started := time.Now()
++	firstPacket := true
++	firstVideo := true
+ 	_ = client.SetDeadline(time.Now().Add(15 * time.Second))
+ 
+ 	var vcodec, acodec *core.Codec
++	var initial []*Packet
++	var initialBytes int
+ 
+ 	for {
+ 		pkt, err := client.ReadPacket()
+@@ -65,21 +77,34 @@ func probe(client *Client, audio bool) ([]*core.Media, error) {
+ 			} else if acodec != nil {
+ 				err = fmt.Errorf("no video")
+ 			}
+-			return nil, fmt.Errorf("xiaomi: probe: %w", err)
++			return nil, nil, fmt.Errorf("xiaomi: probe: %w", err)
+ 		}
++		if firstPacket {
++			fmt.Printf("CATEYE_PHASE at_ms=%d phase=first_packet ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++			firstPacket = false
++		}
++		hadVideo := vcodec != nil
+ 
+ 		switch pkt.CodecID {
+ 		case codecH264:
+ 			if vcodec == nil {
+ 				buf := annexb.EncodeToAVCC(pkt.Payload)
+-				if h264.NALUType(buf) == h264.NALUTypeSPS {
++				if firstVideo {
++					fmt.Printf("CATEYE_PHASE at_ms=%d phase=first_video ms=%d first_nalu=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds(), h264.NALUType(buf))
++					firstVideo = false
++				}
++				if containsNALU(buf, h264.NALUTypeSPS, false) {
+ 					vcodec = h264.AVCCToCodec(buf)
+ 				}
+ 			}
+ 		case codecH265:
+ 			if vcodec == nil {
+ 				buf := annexb.EncodeToAVCC(pkt.Payload)
+-				if h265.NALUType(buf) == h265.NALUTypeVPS {
++				if firstVideo {
++					fmt.Printf("CATEYE_PHASE at_ms=%d phase=first_video ms=%d first_nalu=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds(), h265.NALUType(buf))
++					firstVideo = false
++				}
++				if containsNALU(buf, h265.NALUTypeVPS, true) {
+ 					vcodec = h265.AVCCToCodec(buf)
+ 				}
+ 			}
+@@ -93,6 +118,16 @@ func probe(client *Client, audio bool) ([]*core.Media, error) {
+ 			}
+ 		}
+ 
++		if vcodec != nil {
++			if !hadVideo {
++				fmt.Printf("CATEYE_PHASE at_ms=%d phase=video_header ms=%d\n", time.Now().UnixMilli(), time.Since(started).Milliseconds())
++			}
++			initialBytes += len(pkt.Payload)
++			if initialBytes > 4*1024*1024 {
++				return nil, nil, fmt.Errorf("xiaomi: probe: initial media exceeds limit")
++			}
++			initial = append(initial, pkt)
++		}
+ 		if vcodec != nil && (acodec != nil || !audio) {
+ 			break
+ 		}
+@@ -122,19 +157,44 @@ func probe(client *Client, audio bool) ([]*core.Media, error) {
+ 		})
+ 	}
+ 
+-	return medias, nil
++	return medias, initial, nil
+ }
+ 
+ const timestamp40ms = 48000 * 0.040
+ 
++// Access units may begin with AUD/SEI before the codec parameter sets.
++func containsNALU(data []byte, want byte, hevc bool) bool {
++	for len(data) >= 5 {
++		size := int(binary.BigEndian.Uint32(data))
++		if size < 1 || size > len(data)-4 {
++			return false
++		}
++		typ := data[4] & 0x1F
++		if hevc {
++			typ = data[4] >> 1 & 0x3F
++		}
++		if typ == want {
++			return true
++		}
++		data = data[4+size:]
++	}
++	return false
++}
++
+ func (p *Producer) Start() error {
+ 	var audioTS uint32
+ 
+ 	for {
+-		_ = p.client.SetDeadline(time.Now().Add(10 * time.Second))
+-		pkt, err := p.client.ReadPacket()
+-		if err != nil {
+-			return err
++		var pkt *Packet
++		if len(p.initial) > 0 {
++			pkt, p.initial = p.initial[0], p.initial[1:]
++		} else {
++			_ = p.client.SetDeadline(time.Now().Add(10 * time.Second))
++			var err error
++			pkt, err = p.client.ReadPacket()
++			if err != nil {
++				return err
++			}
+ 		}
+ 
+ 		p.Recv += len(pkt.Payload)
+diff --git a/pkg/xiaomi/miss/producer_cold_test.go b/pkg/xiaomi/miss/producer_cold_test.go
+new file mode 100644
+index 0000000..ecc95de
+--- /dev/null
++++ b/pkg/xiaomi/miss/producer_cold_test.go
+@@ -0,0 +1,27 @@
++package miss
++
++import (
++	"encoding/binary"
++	"testing"
++)
++
++func accessUnit(nalus ...[]byte) []byte {
++	var result []byte
++	for _, nalu := range nalus {
++		result = binary.BigEndian.AppendUint32(result, uint32(len(nalu)))
++		result = append(result, nalu...)
++	}
++	return result
++}
++
++func TestInitialParameterSetsAfterPrefix(t *testing.T) {
++	if !containsNALU(accessUnit([]byte{35 << 1, 1}, []byte{32 << 1, 1}), 32, true) {
++		t.Fatal("HEVC VPS after AUD must be recognized in the first access unit")
++	}
++	if !containsNALU(accessUnit([]byte{9, 1}, []byte{7, 1}), 7, false) {
++		t.Fatal("H264 SPS after AUD must be recognized in the first access unit")
++	}
++	if containsNALU([]byte{0, 0, 2, 0, 64}, 32, true) {
++		t.Fatal("truncated parameter set must not be accepted")
++	}
++}
+diff --git a/pkg/xiaomi/miss/cs2/cold_handshake_test.go b/pkg/xiaomi/miss/cs2/cold_handshake_test.go
+new file mode 100644
+index 0000000..cfa581c
+--- /dev/null
++++ b/pkg/xiaomi/miss/cs2/cold_handshake_test.go
+@@ -0,0 +1,53 @@
++package cs2
++
++import (
++	"net"
++	"sync/atomic"
++	"testing"
++	"time"
++)
++
++// A camera may become ready after initial discovery packets are lost. Recovery
++// should be prompt while connecting, and stop sending when discovery finishes.
++func TestColdDiscoveryRecoversLossAndStops(t *testing.T) {
++	peer, err := net.ListenUDP("udp4", &net.UDPAddr{IP: net.IPv4(127, 0, 0, 1)})
++	if err != nil {
++		t.Fatal(err)
++	}
++	defer peer.Close()
++	local, err := net.ListenUDP("udp4", &net.UDPAddr{IP: net.IPv4(127, 0, 0, 1)})
++	if err != nil {
++		t.Fatal(err)
++	}
++	defer local.Close()
++	c := &udpConn{UDPConn: local, addr: peer.LocalAddr().(*net.UDPAddr)}
++	_ = c.SetDeadline(time.Now().Add(2 * time.Second))
++	var received atomic.Int32
++	go func() {
++		buf := make([]byte, 64)
++		for {
++			_, addr, err := peer.ReadFromUDP(buf)
++			if err != nil {
++				return
++			}
++			if received.Add(1) == 2 {
++				reply := make([]byte, 16)
++				reply[0], reply[1] = magic, msgPunchPkt
++				_, _ = peer.WriteToUDP(reply, addr)
++			}
++		}
++	}()
++	start := time.Now()
++	_, err = c.WriteUntil([]byte{magic, msgLanSearch, 0, 0}, func(b []byte) bool { return b[1] == msgPunchPkt })
++	if err != nil {
++		t.Fatal(err)
++	}
++	if elapsed := time.Since(start); elapsed > 1500*time.Millisecond {
++		t.Fatalf("slow discovery: %v", elapsed)
++	}
++	before := received.Load()
++	time.Sleep(250 * time.Millisecond)
++	if received.Load() != before {
++		t.Fatal("discovery kept sending after completion")
++	}
++}
+diff --git a/pkg/xiaomi/miss/cs2/command_ack_test.go b/pkg/xiaomi/miss/cs2/command_ack_test.go
+new file mode 100644
+index 0000000..59d3b1f
+--- /dev/null
++++ b/pkg/xiaomi/miss/cs2/command_ack_test.go
+@@ -0,0 +1,42 @@
++package cs2
++
++import (
++	"net"
++	"testing"
++	"time"
++)
++
++func TestCommandResponseAndAckLifecycle(t *testing.T) {
++	for _, command := range []uint32{0x100, 0x1001} {
++		left, right := net.Pipe()
++		c := &Conn{Conn: left}
++		go func() {
++			buf := make([]byte, 256)
++			_, _ = right.Read(buf)
++			c.signalCmdAck(true)
++			if command != 0x100 {
++				time.Sleep(30 * time.Millisecond)
++				c.signalCmdAck(false)
++			}
++		}()
++		start := time.Now()
++		if err := c.WriteCommand(command, []byte("request")); err != nil {
++			t.Fatal(err)
++		}
++		elapsed := time.Since(start)
++		if elapsed > 500*time.Millisecond {
++			t.Fatalf("ACK was delayed: %v", elapsed)
++		}
++		if command != 0x100 && elapsed < 20*time.Millisecond {
++			t.Fatal("unrelated auth response acknowledged another command")
++		}
++		c.signalCmdAck(false) // A late ACK must have no live callback/timer.
++		c.ackMu.Lock()
++		if c.cmdAck != nil {
++			t.Error("ACK callback retained after command")
++		}
++		c.ackMu.Unlock()
++		_ = left.Close()
++		_ = right.Close()
++	}
++}

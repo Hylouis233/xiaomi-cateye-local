@@ -1,0 +1,24 @@
+# NOTICE — third-party components
+
+This project does not redistribute the following dependencies. Each remains the
+property of its author and is governed by its own license:
+
+1. **Xiaomi miot SDK** (`server/sdk/miot/`, not included)
+   Copyright (C) Xiaomi Corporation, licensed under the Xiaomi Miloco License
+   Agreement. The runtime needs it for cloud authorization and MIoT event
+   subscription. Obtain it from your own installation of hass-xiaomi-miot or
+   xiaomi_home and drop it into `server/sdk/miot/` yourself.
+
+2. **go2rtc** by AlexxIT (MIT)
+   `go2rtc/*.patch` are patches against v1.9.15 (commit `7c05066`). Build or
+   download the upstream binary yourself; the stock binary is never replaced.
+
+3. **hass-xiaomi-miot** by al-one (GPL-3.0)
+   Used as a source of MIoT spec knowledge during research; no code from it is
+   included in this repository.
+
+4. **miiot/micam** (Apache-2.0)
+   Studied as a reference for the camera P2P stack; no code from it is included.
+
+All credentials, device identifiers, tokens, signed URLs and private network
+addresses have been removed from every file in this repository.

@@ -1,0 +1,119 @@
+{
+  "at": 1793380336.588376,
+  "mode": "servers_observed_no_wake",
+  "cloud_wake_sent": false,
+  "cloud_key_refresh_sent": false,
+  "external_coordination": true,
+  "server_count": 3,
+  "media_requested": false,
+  "replies": [
+    {
+      "from": "server",
+      "ms": 25,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 40,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 51,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 2079,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 2094,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 2105,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 4133,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 4147,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 4158,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 6187,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 6201,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 6212,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 8240,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 8255,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    },
+    {
+      "from": "server",
+      "ms": 8266,
+      "kind": "0x21",
+      "length": 8,
+      "status": "fe000000"
+    }
+  ],
+  "peers": [],
+  "server_source": "observed_device_registration",
+  "elapsed_ms": 9000
+}

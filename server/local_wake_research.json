@@ -1,0 +1,66 @@
+{
+  "at": 1793354585.3445613,
+  "cloud_wake_sent": false,
+  "results": [
+    {
+      "method": "action",
+      "ms": 1301,
+      "success": false,
+      "error": "DeviceException"
+    },
+    {
+      "method": "wakeup_host",
+      "ms": 416,
+      "success": false,
+      "error": "DeviceError",
+      "code": -32602,
+      "message": "Invalid param."
+    },
+    {
+      "method": "wakeup",
+      "ms": 602,
+      "success": false,
+      "error": "DeviceException"
+    }
+  ],
+  "variants": [
+    {
+      "method": "wakeup_host",
+      "params_variant": "empty_list",
+      "ms": 656,
+      "success": false,
+      "error": "DeviceError",
+      "code": -32602,
+      "message": "Invalid param."
+    },
+    {
+      "method": "wakeup",
+      "params_variant": "empty_list",
+      "ms": 1602,
+      "success": false,
+      "error": "DeviceException"
+    },
+    {
+      "method": "action",
+      "params_variant": "action_did",
+      "ms": 1025,
+      "success": false,
+      "error": "DeviceException"
+    },
+    {
+      "method": "action",
+      "params_variant": "no_did",
+      "ms": 1024,
+      "success": false,
+      "error": "DeviceException"
+    }
+  ],
+  "p2p_action": {
+    "at": 1793355945.3945725,
+    "method": "local_start_p2p",
+    "cloud_wake_sent": false,
+    "error": "DeviceException",
+    "accepted": false,
+    "ms": 1215
+  }
+}
